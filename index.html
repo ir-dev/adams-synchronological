@@ -1,85 +1,131 @@
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adams Synchronological</title>
-    <script src="./visjs/vis-timeline-graph2d.7.7.2.min.js"></script>
-    <link rel="stylesheet" href="./visjs/vis-timeline-graph2d.7.7.2.min.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="description" content="ARK-RAPID (ASM) — Adams Synchronological Map: Interactive Biblical History Timeline">
+  <meta name="theme-color" content="#0d1117">
+  <title>ARK-RAPID (ASM) | Biblical History Timeline</title>
+  <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
-    <h1>Adams Synchronological Map</h1>
+<div id="app">
 
-    <div id="visualization"></div>
+  <!-- HEADER -->
+  <header class="app-header" id="app-header">
+    <div class="header-brand">
+      <div class="logo">
+        <span class="logo-ark">ARK</span><span class="logo-sep">-</span><span class="logo-rapid">RAPID</span>
+        <span class="logo-asm">(ASM)</span>
+      </div>
+      <div class="logo-tagline">Adams Synchronological Map</div>
+    </div>
+    <div class="search-wrap">
+      <input type="search" id="search-input" class="search-input"
+             placeholder="Search people, events, scripture…" autocomplete="off" spellcheck="false">
+      <button class="search-icon-btn" id="search-btn" aria-label="Search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+      </button>
+      <button class="search-clear" id="search-clear" aria-label="Clear" hidden>✕</button>
+    </div>
+  </header>
 
-    <script>
-        var data = {
-            display: "Adam / Eve",
-            duration: 903,
-            template: `Adam / Eve`,
-            children: [
-                {
+  <!-- ERA NAVIGATION -->
+  <nav class="era-nav" id="era-nav" aria-label="Era navigation">
+    <div class="era-nav-inner" id="era-nav-inner">
+      <button class="era-btn active" data-era="all">All Eras</button>
+    </div>
+  </nav>
 
-                }
-            ]
-        }
+  <!-- TOOLBAR -->
+  <div class="toolbar" id="toolbar">
+    <div class="zoom-group">
+      <button class="tool-btn" id="zoom-out" title="Show fewer events">−</button>
+      <span class="zoom-label" id="zoom-label">Standard</span>
+      <button class="tool-btn" id="zoom-in" title="Show more events">+</button>
+    </div>
+    <span class="result-count" id="result-count"></span>
+    <button class="tool-btn filter-toggle-btn" id="filter-toggle">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
+      </svg>
+      Filter
+    </button>
+  </div>
 
-        var groups = new vis.DataSet();
-        var items = new vis.DataSet();
-        groups.add([
-            {
-                id: 1,
-                content: "Adam / Eve",
-                nestedGroups: [100, 200]
-            }
-        ]);
-        items.add({
-            id: 1,
-            group: 1,
-            content: 'Adam / Eve',
-            start: new Date().setYear(-4004),
-            end: new Date().setYear(-4004 + 930)
-        });
+  <!-- FILTER PANEL -->
+  <div class="filter-panel" id="filter-panel" hidden>
+    <div class="filter-inner" id="filter-inner"></div>
+  </div>
 
-        groups.add([
-            {
-                id: 200,
-                content: "Abel",
-                nestedGroups: [],
-                showNested: false
-            },
-            {
-                id: 100,
-                content: "Cain",
-                nestedGroups: [],
-                showNested: false
-            }
-        ]);
-        items.add([
-            {
-                id: 100,
-                group: 100,
-                content: 'Cain (end date is unown, but before Adam)',
-                start: new Date().setYear(-4004 + 100),
-                end: new Date().setYear(-4004 + 930)
-            },
-            {
-                id: 200,
-                group: 200,
-                content: 'Abel (end date is unown, but before Adam)',
-                start: new Date().setYear(-4004 + 150),
-                end: new Date().setYear(-4004 + 930)
-            }
-        ]);
+  <!-- MINIMAP -->
+  <div class="minimap" id="minimap">
+    <div class="minimap-bar">
+      <div class="minimap-fill" id="minimap-fill"></div>
+      <div class="minimap-thumb" id="minimap-thumb"></div>
+    </div>
+    <div class="minimap-ends">
+      <span id="minimap-start">4004 BC</span>
+      <span>AD 2026</span>
+    </div>
+  </div>
 
-        var container = document.getElementById('visualization');
-        var options = {
-            groupOrder: 'id',  // groupOrder can be a property name or a sorting function
-            groupTemplate: (item, element, data) => `Lord Jesus my Mster ${item.content}`,
-            start: new Date().setYear(-4004),
-            end: new Date()
-        };
+  <!-- MAIN TIMELINE -->
+  <main class="timeline-main" id="timeline-main">
+    <div class="timeline-spine"></div>
+    <div class="timeline-events" id="timeline-events"></div>
+    <div class="timeline-empty" id="timeline-empty" hidden>
+      <div class="empty-icon">🔍</div>
+      <p>No events match your search or filters.</p>
+      <button class="btn-ghost" id="clear-filters">Clear all filters</button>
+    </div>
+  </main>
 
-        var timeline = new vis.Timeline(container, items, groups, options);
+  <!-- SCROLL TO TOP -->
+  <button class="scroll-top-btn" id="scroll-top" aria-label="Back to top" hidden>↑</button>
 
-    </script>
+  <!-- JUMP FAB -->
+  <button class="fab" id="jump-fab" title="Jump to year">📅</button>
+
+  <!-- JUMP DIALOG -->
+  <div class="dialog-backdrop" id="jump-backdrop" hidden>
+    <div class="dialog" id="jump-dialog">
+      <h3 class="dialog-title">Jump to Year</h3>
+      <p class="dialog-hint">Negative = BC &nbsp;|&nbsp; Positive = AD</p>
+      <div class="dialog-input-row">
+        <input type="number" id="jump-year-input" class="dialog-input"
+               placeholder="-586" min="-4004" max="2026">
+        <button class="btn-primary" id="jump-go">Go</button>
+      </div>
+      <div class="jump-presets">
+        <button class="preset-btn" data-year="-4004">4004 BC<br><small>Creation</small></button>
+        <button class="preset-btn" data-year="-2348">2348 BC<br><small>Flood</small></button>
+        <button class="preset-btn" data-year="-1491">1491 BC<br><small>Exodus</small></button>
+        <button class="preset-btn" data-year="-1010">1010 BC<br><small>David</small></button>
+        <button class="preset-btn" data-year="-586">586 BC<br><small>Babylon</small></button>
+        <button class="preset-btn" data-year="-5">5 BC<br><small>Jesus Born</small></button>
+        <button class="preset-btn" data-year="30">AD 30<br><small>Resurrection</small></button>
+        <button class="preset-btn" data-year="1517">AD 1517<br><small>Reformation</small></button>
+        <button class="preset-btn" data-year="1948">AD 1948<br><small>Israel Reborn</small></button>
+      </div>
+      <button class="btn-ghost dialog-close-btn" id="jump-close">Cancel</button>
+    </div>
+  </div>
+
+  <!-- EVENT DETAIL MODAL -->
+  <div class="modal-backdrop" id="modal-backdrop" hidden>
+    <div class="modal" id="event-modal">
+      <button class="modal-close-btn" id="modal-close" aria-label="Close">✕</button>
+      <div class="modal-body" id="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast" aria-live="polite"></div>
+
+</div>
+<script src="js/app.js"></script>
 </body>
 </html>

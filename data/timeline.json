@@ -1,0 +1,1027 @@
+{
+  "version": "1.0",
+  "name": "ARK-RAPID (ASM) Timeline",
+  "subtitle": "Adams Synchronological Map — Biblical & World History",
+  "eras": [
+    { "id": "pre-flood", "name": "Pre-Flood Era", "startYear": -4004, "endYear": -2348, "color": "#2d6b1f", "icon": "🌿", "description": "From Creation to the Great Flood — 1,656 years" },
+    { "id": "post-flood", "name": "Post-Flood Nations", "startYear": -2348, "endYear": -2000, "color": "#1a4a6e", "icon": "🌊", "description": "After the Flood: nations formed and scattered at Babel" },
+    { "id": "patriarchal", "name": "Patriarchal Period", "startYear": -2000, "endYear": -1706, "color": "#7a4a2a", "icon": "🏕️", "description": "Abraham, Isaac, Jacob — founding of the Hebrew people" },
+    { "id": "egypt-exodus", "name": "Egypt & Exodus", "startYear": -1706, "endYear": -1451, "color": "#9a6a1a", "icon": "🏺", "description": "Egypt's bondage to the Exodus and wilderness journey" },
+    { "id": "judges", "name": "Period of Judges", "startYear": -1451, "endYear": -1050, "color": "#3a6a4a", "icon": "⚔️", "description": "Israel's cyclical rebellion, oppression, and deliverance" },
+    { "id": "united-kingdom", "name": "United Kingdom", "startYear": -1050, "endYear": -931, "color": "#6a4a8a", "icon": "👑", "description": "Saul, David, and Solomon — Israel at its greatest" },
+    { "id": "divided-kingdom", "name": "Divided Kingdom", "startYear": -931, "endYear": -722, "color": "#8a3a3a", "icon": "🗡️", "description": "Israel and Judah split — until Israel falls to Assyria" },
+    { "id": "judah-alone", "name": "Judah Alone", "startYear": -722, "endYear": -586, "color": "#5a3a7a", "icon": "🏛️", "description": "Judah survives after Israel's fall — until Babylon destroys Jerusalem" },
+    { "id": "captivity-return", "name": "Captivity & Return", "startYear": -605, "endYear": -400, "color": "#2a5a7a", "icon": "🕊️", "description": "Babylonian exile and return under Zerubbabel, Ezra, Nehemiah" },
+    { "id": "silent-period", "name": "Silent Period", "startYear": -430, "endYear": -5, "color": "#4a4a6a", "icon": "🏛️", "description": "400 years between Malachi and Matthew — Greek and Roman rule" },
+    { "id": "life-of-christ", "name": "Life of Christ", "startYear": -5, "endYear": 33, "color": "#c49a30", "icon": "✝️", "description": "The incarnation, ministry, death, and resurrection of Jesus Christ" },
+    { "id": "early-church", "name": "Early Church", "startYear": 33, "endYear": 100, "color": "#7a5a3a", "icon": "⛪", "description": "Pentecost to John's death — Acts and the Epistles" },
+    { "id": "church-age", "name": "Church Age", "startYear": 100, "endYear": 1517, "color": "#4a3a6a", "icon": "📜", "description": "Councils, creeds, persecution, and medieval Christendom" },
+    { "id": "reformation-modern", "name": "Reformation to Present", "startYear": 1517, "endYear": 2026, "color": "#2a5a4a", "icon": "📖", "description": "The Reformation, New World, and the modern age" }
+  ],
+  "categories": [
+    { "id": "patriarch", "name": "Patriarch", "icon": "👤", "color": "#5a8a3a" },
+    { "id": "event", "name": "Key Event", "icon": "⚡", "color": "#d4a843" },
+    { "id": "king", "name": "King / Ruler", "icon": "👑", "color": "#8a3a8a" },
+    { "id": "prophet", "name": "Prophet", "icon": "📣", "color": "#3a8a8a" },
+    { "id": "judge", "name": "Judge", "icon": "⚖️", "color": "#8a6a3a" },
+    { "id": "apostle", "name": "Apostle", "icon": "✉️", "color": "#d46a43" },
+    { "id": "empire", "name": "Empire / Nation", "icon": "🏛️", "color": "#4a5a8a" },
+    { "id": "church", "name": "Church History", "icon": "⛪", "color": "#6a4a7a" },
+    { "id": "reformation", "name": "Reformation", "icon": "📖", "color": "#3a6a3a" },
+    { "id": "modern", "name": "Modern Era", "icon": "🌍", "color": "#3a5a7a" }
+  ],
+  "events": [
+    {
+      "id": "creation", "year": -4004, "title": "Creation",
+      "subtitle": "In the Beginning, God Created",
+      "description": "God created the heavens and the earth in six literal days. He formed light, sky, land, seas, plants, sun, moon, stars, fish, birds, animals, and finally mankind in His own image. Adam was formed from dust; Eve from Adam's rib. God rested on the seventh day and declared all creation very good.",
+      "scripture": "Genesis 1:1 – 2:3",
+      "category": "event", "era": "pre-flood", "importance": 1, "type": "event",
+      "concurrent": "Earth's pre-history; no human civilizations existed",
+      "tags": ["creation", "genesis", "beginning", "adam", "eve", "garden of eden"]
+    },
+    {
+      "id": "adam", "year": -4004, "endYear": -3074, "title": "Adam",
+      "subtitle": "First Man — Lived 930 Years",
+      "description": "Adam was the first man, formed by God from the dust of the ground and given the breath of life. Placed in the Garden of Eden, he named the animals and received Eve as his companion. After the Fall he labored outside the garden. He fathered Seth at age 130 and died at age 930.",
+      "scripture": "Genesis 2:7; 5:3-5",
+      "category": "patriarch", "era": "pre-flood", "importance": 2, "type": "person",
+      "concurrent": "No other civilizations existed yet",
+      "tags": ["adam", "creation", "fall", "patriarch", "pre-flood"]
+    },
+    {
+      "id": "fall-of-man", "year": -4003, "title": "The Fall of Man",
+      "subtitle": "Sin Enters the World",
+      "description": "Deceived by the serpent, Eve ate the forbidden fruit and gave it to Adam. God cursed the serpent, promised enmity between his seed and the woman's seed (the proto-evangel), pronounced pain in childbirth and labor on the ground, and expelled Adam and Eve from the Garden of Eden.",
+      "scripture": "Genesis 3:1-24",
+      "category": "event", "era": "pre-flood", "importance": 1, "type": "event",
+      "concurrent": "First sin; spiritual and physical death enters creation",
+      "tags": ["fall", "sin", "eden", "serpent", "curse", "redemption"]
+    },
+    {
+      "id": "cain-abel", "year": -3875, "title": "Cain Kills Abel",
+      "subtitle": "First Murder",
+      "description": "Adam's sons Cain (a farmer) and Abel (a shepherd) brought offerings to God. God accepted Abel's but rejected Cain's. In jealous anger, Cain murdered his brother Abel — the first homicide. God cursed Cain to wander the earth, but placed a protective mark on him.",
+      "scripture": "Genesis 4:1-16",
+      "category": "event", "era": "pre-flood", "importance": 2, "type": "event",
+      "tags": ["cain", "abel", "murder", "offering", "sin"]
+    },
+    {
+      "id": "seth", "year": -3874, "endYear": -2962, "title": "Seth",
+      "subtitle": "Lived 912 Years",
+      "description": "Seth was born to Adam at age 130, replacing Abel. Through Seth came the godly line leading to Noah and ultimately to Christ. Seth fathered Enos at age 105.",
+      "scripture": "Genesis 5:3-8",
+      "category": "patriarch", "era": "pre-flood", "importance": 2, "type": "person",
+      "tags": ["seth", "patriarch", "pre-flood", "messianic line"]
+    },
+    {
+      "id": "enos", "year": -3769, "endYear": -2864, "title": "Enos (Enosh)",
+      "subtitle": "Lived 905 Years — Men Begin Calling on God",
+      "description": "Enos was born to Seth at age 105. In his days, men began to call upon the name of the LORD — possibly the beginning of corporate worship. He lived 905 years.",
+      "scripture": "Genesis 4:26; 5:9-11",
+      "category": "patriarch", "era": "pre-flood", "importance": 3, "type": "person",
+      "tags": ["enos", "patriarch", "pre-flood", "worship"]
+    },
+    {
+      "id": "cainan", "year": -3679, "endYear": -2769, "title": "Cainan (Kenan)",
+      "subtitle": "Lived 910 Years",
+      "description": "Cainan was born to Enos at age 90. He lived 910 years and fathered Mahalaleel at age 70. He is part of the unbroken genealogical line from Adam to Noah.",
+      "scripture": "Genesis 5:12-14",
+      "category": "patriarch", "era": "pre-flood", "importance": 4, "type": "person",
+      "tags": ["cainan", "kenan", "patriarch", "pre-flood"]
+    },
+    {
+      "id": "mahalaleel", "year": -3609, "endYear": -2714, "title": "Mahalaleel",
+      "subtitle": "Lived 895 Years",
+      "description": "Mahalaleel was born to Cainan at age 70. His name means 'Praise of God.' He lived 895 years and fathered Jared at age 65.",
+      "scripture": "Genesis 5:15-17",
+      "category": "patriarch", "era": "pre-flood", "importance": 4, "type": "person",
+      "tags": ["mahalaleel", "patriarch", "pre-flood"]
+    },
+    {
+      "id": "jared", "year": -3544, "endYear": -2582, "title": "Jared",
+      "subtitle": "Lived 962 Years",
+      "description": "Jared was born to Mahalaleel at age 65. He lived the second-longest lifespan recorded in Scripture at 962 years. He fathered Enoch at age 162.",
+      "scripture": "Genesis 5:18-20",
+      "category": "patriarch", "era": "pre-flood", "importance": 4, "type": "person",
+      "tags": ["jared", "patriarch", "pre-flood"]
+    },
+    {
+      "id": "enoch", "year": -3382, "endYear": -3017, "title": "Enoch",
+      "subtitle": "Translated Without Death — Walked with God",
+      "description": "Enoch was born to Jared at age 162. He walked with God for 300 years after the birth of Methuselah. At age 365, God took him — he did not die, the only pre-flood patriarch translated directly to God's presence. He is a type of the rapture of the Church.",
+      "scripture": "Genesis 5:21-24; Hebrews 11:5; Jude 14",
+      "category": "patriarch", "era": "pre-flood", "importance": 2, "type": "person",
+      "tags": ["enoch", "patriarch", "translation", "rapture", "pre-flood", "walk with god"]
+    },
+    {
+      "id": "methuselah", "year": -3317, "endYear": -2348, "title": "Methuselah",
+      "subtitle": "Oldest Man — Lived 969 Years",
+      "description": "Methuselah holds the record as the oldest man in Scripture at 969 years. Born to Enoch at age 65, he died in the year of the Flood. His very name may mean 'When he dies, it shall be sent' — a prophetic warning of the coming judgment.",
+      "scripture": "Genesis 5:25-27",
+      "category": "patriarch", "era": "pre-flood", "importance": 2, "type": "person",
+      "concurrent": "Egypt: Pre-Dynastic Period (Naqada culture)",
+      "tags": ["methuselah", "patriarch", "pre-flood", "oldest", "flood"]
+    },
+    {
+      "id": "lamech", "year": -3130, "endYear": -2353, "title": "Lamech",
+      "subtitle": "Lived 777 Years — Father of Noah",
+      "description": "Lamech was born to Methuselah at age 187. He prophesied at Noah's birth that his son would bring comfort from the curse on the ground. He died five years before the Flood, at age 777.",
+      "scripture": "Genesis 5:28-31",
+      "category": "patriarch", "era": "pre-flood", "importance": 3, "type": "person",
+      "tags": ["lamech", "patriarch", "pre-flood", "noah"]
+    },
+    {
+      "id": "noah", "year": -2948, "endYear": -1998, "title": "Noah",
+      "subtitle": "Lived 950 Years — Righteous in His Generation",
+      "description": "Noah was born to Lamech at age 182. In a world filled with corruption and violence, Noah found grace in the eyes of the LORD. God commanded him to build an ark to save his family and two of every kind of animal from the coming Flood. He entered the ark at age 600 and died at age 950.",
+      "scripture": "Genesis 5:29; 6:8-9; 9:29",
+      "category": "patriarch", "era": "pre-flood", "importance": 2, "type": "person",
+      "concurrent": "Egypt: Early Dynastic Period forming (c. 3100 BC)",
+      "tags": ["noah", "patriarch", "pre-flood", "flood", "ark", "grace"]
+    },
+    {
+      "id": "nephilim-violence", "year": -2500, "title": "Corruption and Violence Fill the Earth",
+      "subtitle": "Sons of God and Daughters of Men",
+      "description": "The sons of God (likely fallen angels or the godly line of Seth) intermarried with the daughters of men, producing the Nephilim — mighty men of renown. Wickedness increased until every intent of man's heart was only evil continually. God resolved to judge the earth with a flood.",
+      "scripture": "Genesis 6:1-7",
+      "category": "event", "era": "pre-flood", "importance": 3, "type": "event",
+      "tags": ["nephilim", "sons of god", "violence", "corruption", "judgment"]
+    },
+    {
+      "id": "noah-builds-ark", "year": -2468, "title": "Noah Builds the Ark",
+      "subtitle": "120 Years of Preaching and Building",
+      "description": "God commanded Noah to build an ark of gopher wood: 300 cubits long, 50 cubits wide, and 30 cubits high. Noah spent approximately 100 years building the ark while preaching righteousness to a mocking world. He was a preacher of righteousness (2 Pet 2:5).",
+      "scripture": "Genesis 6:14-22; 2 Peter 2:5",
+      "category": "event", "era": "pre-flood", "importance": 3, "type": "event",
+      "tags": ["noah", "ark", "building", "preaching", "judgment"]
+    },
+    {
+      "id": "great-flood", "year": -2348, "title": "The Great Flood",
+      "subtitle": "God Judges the World — Noah's 600th Year",
+      "description": "In Noah's 600th year, the fountains of the great deep burst open and the windows of heaven were opened. It rained 40 days and 40 nights. The floodwaters covered the highest mountains by 15 cubits. All air-breathing life outside the ark perished. The waters prevailed 150 days before receding.",
+      "scripture": "Genesis 7:1 – 8:19",
+      "category": "event", "era": "pre-flood", "importance": 1, "type": "event",
+      "concurrent": "Global geological formations: sedimentary layers, coal deposits, fossils laid down",
+      "tags": ["flood", "judgment", "noah", "ark", "global", "water", "genesis"]
+    },
+    {
+      "id": "noahic-covenant", "year": -2347, "title": "Noahic Covenant & Rainbow",
+      "subtitle": "God's Promise Never to Flood the Earth Again",
+      "description": "After the Flood, Noah built an altar and offered burnt offerings. God smelled the pleasing aroma and promised never again to curse the ground or destroy all living creatures with a flood. He established the rainbow as the sign of His covenant with all creation.",
+      "scripture": "Genesis 8:20 – 9:17",
+      "category": "event", "era": "post-flood", "importance": 2, "type": "event",
+      "tags": ["covenant", "rainbow", "noah", "promise", "post-flood"]
+    },
+    {
+      "id": "shem", "year": -2448, "endYear": -1848, "title": "Shem",
+      "subtitle": "Lived 600 Years — Father of the Semites",
+      "description": "Shem was Noah's eldest son. Blessed by Noah ('Blessed be the LORD, the God of Shem'), he became the father of the Semitic peoples including the Hebrews, Arabs, and Arameans. He outlived many of his descendants and was still alive when Abraham was born.",
+      "scripture": "Genesis 9:26; 10:21-31; 11:10-11",
+      "category": "patriarch", "era": "post-flood", "importance": 2, "type": "person",
+      "concurrent": "Egypt: Early Dynastic Period (Narmer/Menes unifies Egypt c. 3100 BC)",
+      "tags": ["shem", "patriarch", "semites", "post-flood", "noah"]
+    },
+    {
+      "id": "arphaxad", "year": -2346, "endYear": -1908, "title": "Arphaxad",
+      "subtitle": "Lived 438 Years — Born 2 Years After the Flood",
+      "description": "Arphaxad was born to Shem two years after the Flood. He is the ancestor of the Hebrews and lived 438 years. His line runs directly through to Abraham.",
+      "scripture": "Genesis 11:10-13",
+      "category": "patriarch", "era": "post-flood", "importance": 3, "type": "person",
+      "tags": ["arphaxad", "patriarch", "post-flood", "shem"]
+    },
+    {
+      "id": "table-of-nations", "year": -2300, "title": "Table of Nations",
+      "subtitle": "70 Nations Descend from Noah's Three Sons",
+      "description": "From Shem, Ham, and Japheth came all the nations of the earth after the Flood. Japheth's descendants settled Europe and Asia Minor; Ham's in Africa and Canaan; Shem's in the Middle East. Genesis 10 lists 70 nations — the foundation of all human civilizations.",
+      "scripture": "Genesis 10:1-32",
+      "category": "event", "era": "post-flood", "importance": 3, "type": "event",
+      "concurrent": "Mesopotamia: Early Dynastic period. Egypt: Old Kingdom pyramid age begins",
+      "tags": ["nations", "genesis", "shem", "ham", "japheth", "genealogy"]
+    },
+    {
+      "id": "salah", "year": -2311, "endYear": -1878, "title": "Salah (Shelah)",
+      "subtitle": "Lived 433 Years",
+      "description": "Salah was born to Arphaxad at age 35 and lived 433 years. He is part of the direct lineage from Shem to Abraham.",
+      "scripture": "Genesis 11:12-15",
+      "category": "patriarch", "era": "post-flood", "importance": 4, "type": "person",
+      "tags": ["salah", "shelah", "patriarch", "post-flood"]
+    },
+    {
+      "id": "eber", "year": -2281, "endYear": -1817, "title": "Eber",
+      "subtitle": "Lived 464 Years — Root of the Word 'Hebrew'",
+      "description": "Eber was born to Salah at age 30. He lived 464 years, one of the longer post-Flood lifespans. His name is thought to be the root of the word 'Hebrew' (Ibri). He fathered Peleg at age 34, in whose days the earth was divided.",
+      "scripture": "Genesis 11:14-17",
+      "category": "patriarch", "era": "post-flood", "importance": 3, "type": "person",
+      "tags": ["eber", "patriarch", "hebrew", "post-flood"]
+    },
+    {
+      "id": "tower-of-babel", "year": -2242, "title": "Tower of Babel",
+      "subtitle": "God Scatters the Nations — Languages Confused",
+      "description": "In the plain of Shinar (Mesopotamia), the post-Flood people gathered to build a city and tower reaching to heaven, to make a name for themselves. God confused their language and scattered them abroad over the face of the earth — the origin of all human languages and the dispersion of nations.",
+      "scripture": "Genesis 11:1-9",
+      "category": "event", "era": "post-flood", "importance": 1, "type": "event",
+      "concurrent": "Mesopotamia: Proto-Sumerian civilization. Egypt: Old Kingdom (Pharaoh Djoser, Step Pyramid c. 2667 BC)",
+      "tags": ["babel", "tower", "language", "scattering", "nations", "shinar", "babylon"]
+    },
+    {
+      "id": "peleg", "year": -2247, "endYear": -2008, "title": "Peleg",
+      "subtitle": "Earth Divided in His Days — Lived 239 Years",
+      "description": "Peleg was born to Eber at age 34. His name means 'division' and Genesis records that 'in his days the earth was divided' — likely a reference to the dispersion at Babel or possibly a physical continental separation. He lived only 239 years, much shorter than pre-Flood patriarchs.",
+      "scripture": "Genesis 10:25; 11:16-19",
+      "category": "patriarch", "era": "post-flood", "importance": 3, "type": "person",
+      "tags": ["peleg", "patriarch", "division", "earth", "post-flood", "babel"]
+    },
+    {
+      "id": "reu", "year": -2217, "endYear": -1978, "title": "Reu",
+      "subtitle": "Lived 239 Years",
+      "description": "Reu was born to Peleg at age 30 and lived 239 years. He is part of the lineage connecting the post-Flood world to Abraham.",
+      "scripture": "Genesis 11:18-21",
+      "category": "patriarch", "era": "post-flood", "importance": 4, "type": "person",
+      "tags": ["reu", "patriarch", "post-flood"]
+    },
+    {
+      "id": "serug", "year": -2185, "endYear": -1955, "title": "Serug",
+      "subtitle": "Lived 230 Years",
+      "description": "Serug was born to Reu at age 32 and lived 230 years. Jewish tradition associates him with the beginnings of idol worship among his descendants in Mesopotamia.",
+      "scripture": "Genesis 11:20-23",
+      "category": "patriarch", "era": "post-flood", "importance": 4, "type": "person",
+      "tags": ["serug", "patriarch", "post-flood", "idolatry"]
+    },
+    {
+      "id": "nahor", "year": -2155, "endYear": -2007, "title": "Nahor",
+      "subtitle": "Lived 148 Years",
+      "description": "Nahor was born to Serug at age 30 and lived 148 years. He is the grandfather of Abraham. The rapid decline in lifespans continues with this generation.",
+      "scripture": "Genesis 11:22-25",
+      "category": "patriarch", "era": "post-flood", "importance": 4, "type": "person",
+      "tags": ["nahor", "patriarch", "post-flood", "abraham"]
+    },
+    {
+      "id": "terah", "year": -2126, "endYear": -1921, "title": "Terah",
+      "subtitle": "Lived 205 Years — Father of Abraham",
+      "description": "Terah was born to Nahor at age 29 and lived 205 years. He fathered Abram (Abraham), Nahor, and Haran in Ur of the Chaldees. He began the journey to Canaan but stopped and settled in Haran, where he died at age 205. Joshua later records that Terah served other gods.",
+      "scripture": "Genesis 11:24-32; Joshua 24:2",
+      "category": "patriarch", "era": "post-flood", "importance": 3, "type": "person",
+      "concurrent": "Mesopotamia: Third Dynasty of Ur (Neo-Sumerian period). Egypt: First Intermediate Period",
+      "tags": ["terah", "patriarch", "ur", "haran", "abraham", "post-flood"]
+    },
+    {
+      "id": "egypt-old-kingdom", "year": -2686, "title": "Egypt: Old Kingdom",
+      "subtitle": "Age of the Pyramids",
+      "description": "Egypt's Old Kingdom saw the construction of the great pyramids at Giza under Pharaohs Khufu, Khafre, and Menkaure. This was one of the most powerful early civilizations, and its timeline runs parallel to the post-Flood patriarchs of Scripture.",
+      "scripture": null,
+      "category": "empire", "era": "post-flood", "importance": 3, "type": "event",
+      "tags": ["egypt", "pyramids", "old kingdom", "pharaoh", "world history"]
+    },
+    {
+      "id": "ur-of-chaldees", "year": -2100, "title": "Ur of the Chaldees",
+      "subtitle": "Birthplace of Abraham",
+      "description": "Ur was one of the most prosperous and sophisticated cities of the ancient world, located in southern Mesopotamia (modern-day Iraq). It was the birthplace of Abram. Excavations have revealed elaborate royal tombs, a ziggurat (temple tower), cuneiform tablets, and evidence of a prosperous culture contemporary with Abraham's early life.",
+      "scripture": "Genesis 11:31; Acts 7:2-4",
+      "category": "empire", "era": "post-flood", "importance": 3, "type": "event",
+      "concurrent": "Third Dynasty of Ur at its peak under Ur-Nammu",
+      "tags": ["ur", "chaldees", "abraham", "mesopotamia", "babylon", "world history"]
+    },
+    {
+      "id": "abraham-born", "year": -1996, "title": "Abraham Born",
+      "subtitle": "Terah's Son — Father of the Faithful",
+      "description": "Abram (later renamed Abraham) was born in Ur of the Chaldees. God would call him out of his homeland to the promised land of Canaan. He would become the father of the Hebrew nation, ancestor of Christ according to the flesh, and the father of all who believe by faith.",
+      "scripture": "Genesis 11:26; Romans 4:16; Hebrews 11:8",
+      "category": "patriarch", "era": "patriarchal", "importance": 2, "type": "person",
+      "tags": ["abraham", "abram", "patriarch", "faith", "promised land"]
+    },
+    {
+      "id": "call-of-abraham", "year": -1921, "title": "God Calls Abraham",
+      "subtitle": "Leave Your Country — Go to the Land I Will Show You",
+      "description": "At age 75, Abraham received God's call to leave Haran and travel to an unknown land. God promised to make him a great nation, bless him, make his name great, bless those who bless him and curse those who curse him, and bless all families of the earth through him — the Abrahamic Covenant. He obeyed by faith.",
+      "scripture": "Genesis 12:1-9; Hebrews 11:8",
+      "category": "event", "era": "patriarchal", "importance": 1, "type": "event",
+      "concurrent": "Egypt: Middle Kingdom. Mesopotamia: Old Babylonian period (Hammurabi's predecessors)",
+      "tags": ["abraham", "covenant", "call", "faith", "canaan", "blessing", "promised land"]
+    },
+    {
+      "id": "abrahamic-covenant", "year": -1913, "title": "Abrahamic Covenant Confirmed",
+      "subtitle": "Covenant of the Pieces — Unconditional Promise",
+      "description": "God made a formal, unconditional covenant with Abraham. A deep sleep fell on Abraham, and God alone passed through the divided pieces as a smoking oven and flaming torch — signifying that the covenant's fulfillment depended entirely on God, not Abraham. God promised the land from the river of Egypt to the Euphrates.",
+      "scripture": "Genesis 15:1-21",
+      "category": "event", "era": "patriarchal", "importance": 2, "type": "event",
+      "tags": ["covenant", "abraham", "land", "promise", "unconditional", "israel"]
+    },
+    {
+      "id": "sodom-gomorrah", "year": -1897, "title": "Sodom & Gomorrah Destroyed",
+      "subtitle": "Divine Judgment by Fire and Brimstone",
+      "description": "God destroyed Sodom and Gomorrah and the surrounding cities with sulfur and fire from heaven because of their extreme wickedness. Only Lot and his two daughters escaped. Lot's wife looked back and became a pillar of salt. The cities have never been rebuilt and remain a standing warning of divine judgment.",
+      "scripture": "Genesis 18-19; Jude 7",
+      "category": "event", "era": "patriarchal", "importance": 2, "type": "event",
+      "tags": ["sodom", "gomorrah", "judgment", "fire", "lot", "wickedness"]
+    },
+    {
+      "id": "isaac-born", "year": -1896, "title": "Isaac Born",
+      "subtitle": "The Child of Promise — Abraham 100, Sarah 90",
+      "description": "Isaac was born to Abraham and Sarah in their old age — Abraham 100 years old, Sarah 90. His birth was the miraculous fulfillment of God's promise made 25 years earlier. His name means 'laughter,' reflecting Sarah's laughter of unbelief (and later joy). Through Isaac the covenant line would continue.",
+      "scripture": "Genesis 21:1-7",
+      "category": "patriarch", "era": "patriarchal", "importance": 2, "type": "person",
+      "tags": ["isaac", "patriarch", "promise", "miracle", "abraham", "sarah"]
+    },
+    {
+      "id": "abrahams-test", "year": -1871, "title": "Abraham's Test — Binding of Isaac",
+      "subtitle": "God Will Provide the Lamb",
+      "description": "God tested Abraham by commanding him to sacrifice Isaac on Mount Moriah (later the site of Solomon's Temple). Abraham obeyed in faith, believing God could raise the dead. At the last moment, God provided a ram caught in a thicket as a substitute. This event powerfully foreshadows the substitutionary death of Christ.",
+      "scripture": "Genesis 22:1-19; Hebrews 11:17-19",
+      "category": "event", "era": "patriarchal", "importance": 2, "type": "event",
+      "tags": ["abraham", "isaac", "moriah", "sacrifice", "lamb", "foreshadow", "christ", "faith"]
+    },
+    {
+      "id": "jacob-esau", "year": -1836, "title": "Jacob and Esau Born",
+      "subtitle": "Twin Sons of Isaac — Two Nations",
+      "description": "Rebekah, Isaac's wife, gave birth to twins: Esau (firstborn, ruddy and hairy) and Jacob (grasping Esau's heel). Before their birth, God declared 'the older shall serve the younger.' Esau later sold his birthright to Jacob for a bowl of stew. Jacob deceived Isaac and received the patriarchal blessing.",
+      "scripture": "Genesis 25:19-34; 27:1-40; Romans 9:10-13",
+      "category": "event", "era": "patriarchal", "importance": 2, "type": "event",
+      "tags": ["jacob", "esau", "isaac", "birthright", "blessing", "twins", "edom", "israel"]
+    },
+    {
+      "id": "jacob-ladder", "year": -1759, "title": "Jacob at Bethel — Stairway to Heaven",
+      "subtitle": "God Confirms the Covenant with Jacob",
+      "description": "Fleeing from Esau, Jacob slept at Bethel and dreamed of a stairway reaching from earth to heaven with angels ascending and descending. God stood above it and confirmed the Abrahamic covenant with Jacob — promising the land, numerous descendants, and that all peoples on earth would be blessed through him.",
+      "scripture": "Genesis 28:10-22",
+      "category": "event", "era": "patriarchal", "importance": 3, "type": "event",
+      "tags": ["jacob", "bethel", "covenant", "angels", "dream", "ladder", "promise"]
+    },
+    {
+      "id": "hammurabi", "year": -1792, "title": "Hammurabi's Law Code",
+      "subtitle": "Babylon's Great King Codifies Law",
+      "description": "Hammurabi, king of Babylon, issued one of the earliest comprehensive law codes — 282 laws governing trade, property, and social relations. His reign is contemporary with the early patriarchs. The code predates the Mosaic Law and shows the widespread legal culture of the ancient Near East.",
+      "scripture": null,
+      "category": "empire", "era": "patriarchal", "importance": 3, "type": "event",
+      "tags": ["hammurabi", "babylon", "law", "mesopotamia", "world history"]
+    },
+    {
+      "id": "joseph-sold", "year": -1728, "title": "Joseph Sold into Egypt",
+      "subtitle": "What You Meant for Evil, God Meant for Good",
+      "description": "Joseph, Jacob's eleventh son and Rachel's firstborn, was hated by his brothers for his dreams and his father's favoritism. They threw him into a pit and then sold him to Ishmaelite traders for 20 pieces of silver, who took him to Egypt. He was then sold to Potiphar, captain of Pharaoh's guard.",
+      "scripture": "Genesis 37:12-36",
+      "category": "event", "era": "patriarchal", "importance": 2, "type": "event",
+      "tags": ["joseph", "egypt", "brothers", "jealousy", "providence", "silver"]
+    },
+    {
+      "id": "joseph-rises", "year": -1715, "title": "Joseph Rises to Power in Egypt",
+      "subtitle": "From Prison to Pharaoh's Right Hand",
+      "description": "After being falsely accused by Potiphar's wife and imprisoned for years, Joseph interpreted Pharaoh's dreams of seven fat and seven thin cows — predicting seven years of plenty followed by seven years of famine. Pharaoh appointed Joseph second in command over all Egypt at age 30 to prepare for the famine.",
+      "scripture": "Genesis 41:1-45",
+      "category": "event", "era": "patriarchal", "importance": 2, "type": "event",
+      "concurrent": "Egypt: Middle Kingdom — 13th Dynasty",
+      "tags": ["joseph", "pharaoh", "dream", "famine", "egypt", "prime minister", "providence"]
+    },
+    {
+      "id": "jacob-to-egypt", "year": -1706, "title": "Jacob's Family Goes to Egypt",
+      "subtitle": "70 Souls Enter Egypt",
+      "description": "During the great famine, Jacob sent his sons to buy grain in Egypt. Joseph revealed himself to his brothers, forgave them, and invited the entire family to settle in Goshen. Jacob (Israel) came to Egypt at age 130 with 70 souls — the beginning of Israel's sojourn in Egypt that would last 430 years.",
+      "scripture": "Genesis 45-47; Exodus 12:40",
+      "category": "event", "era": "egypt-exodus", "importance": 2, "type": "event",
+      "tags": ["jacob", "joseph", "egypt", "goshen", "famine", "reunion", "israel", "70 souls"]
+    },
+    {
+      "id": "israel-enslaved", "year": -1615, "title": "Israel Enslaved in Egypt",
+      "subtitle": "A New Pharaoh Who Did Not Know Joseph",
+      "description": "A new Pharaoh arose who did not know Joseph. Fearing the growing Israelite population, he enslaved them and forced them into brutal labor building the store cities of Pithom and Raamses. He also ordered the killing of all Hebrew male infants. Israel cried out to God in their affliction.",
+      "scripture": "Exodus 1:1-22",
+      "category": "event", "era": "egypt-exodus", "importance": 2, "type": "event",
+      "concurrent": "Egypt: Hyksos invasion and New Kingdom rising (Ahmose I expels Hyksos c. 1550 BC)",
+      "tags": ["israel", "egypt", "slavery", "pharaoh", "oppression", "bondage"]
+    },
+    {
+      "id": "moses-born", "year": -1571, "title": "Moses Born",
+      "subtitle": "Hidden in the Nile — Adopted by Pharaoh's Daughter",
+      "description": "Moses was born to Levite parents Amram and Jochebed during Pharaoh's genocide against Hebrew male infants. His mother hid him for three months, then placed him in a papyrus basket on the Nile. Pharaoh's daughter found him and adopted him into the royal household, unknowingly hiring his own mother as his nurse.",
+      "scripture": "Exodus 2:1-10; Acts 7:20-22; Hebrews 11:23",
+      "category": "event", "era": "egypt-exodus", "importance": 2, "type": "event",
+      "tags": ["moses", "birth", "nile", "pharaoh", "basket", "princess", "jochebed"]
+    },
+    {
+      "id": "burning-bush", "year": -1491, "title": "The Burning Bush",
+      "subtitle": "God Commissions Moses — I AM THAT I AM",
+      "description": "Moses, now 80 years old and tending his father-in-law's flocks in Midian, saw a bush burning but not consumed. God spoke from the bush, revealed His name as 'I AM THAT I AM' (YHWH), and commissioned Moses to return to Egypt to lead Israel out of bondage. He revealed the Abrahamic covenant and promised to bring them to a good and spacious land.",
+      "scripture": "Exodus 3:1-22",
+      "category": "event", "era": "egypt-exodus", "importance": 2, "type": "event",
+      "tags": ["moses", "bush", "god", "YHWH", "commission", "egypt", "I AM"]
+    },
+    {
+      "id": "ten-plagues", "year": -1491, "title": "The Ten Plagues of Egypt",
+      "subtitle": "God's Judgment on Egypt's False Gods",
+      "description": "God sent ten devastating plagues on Egypt through Moses: (1) Water to blood, (2) Frogs, (3) Lice/gnats, (4) Flies, (5) Livestock disease, (6) Boils, (7) Hail, (8) Locusts, (9) Darkness, (10) Death of firstborn. Each plague targeted a specific Egyptian deity. Pharaoh hardened his heart repeatedly until the final plague.",
+      "scripture": "Exodus 7-12",
+      "category": "event", "era": "egypt-exodus", "importance": 2, "type": "event",
+      "concurrent": "Egypt: New Kingdom — 18th Dynasty (possibly Thutmose III or Amenhotep II as Pharaoh of Exodus)",
+      "tags": ["plagues", "egypt", "pharaoh", "judgment", "moses", "god", "hardened heart"]
+    },
+    {
+      "id": "passover", "year": -1491, "title": "The Passover",
+      "subtitle": "Blood on the Doorposts — Death Passes Over",
+      "description": "God commanded each Israelite family to slaughter a spotless male lamb, apply its blood to the doorposts and lintel, and eat the lamb with bitter herbs and unleavened bread. When the death angel passed through Egypt, he 'passed over' every home where the blood was applied. The Passover powerfully foreshadows Christ as our Passover Lamb.",
+      "scripture": "Exodus 12:1-30; 1 Corinthians 5:7",
+      "category": "event", "era": "egypt-exodus", "importance": 1, "type": "event",
+      "tags": ["passover", "lamb", "blood", "passover", "christ", "foreshadow", "sacrifice", "death angel"]
+    },
+    {
+      "id": "exodus", "year": -1491, "title": "The Exodus from Egypt",
+      "subtitle": "600,000 Men Plus Women and Children Depart",
+      "description": "After 430 years in Egypt, approximately 2-3 million Israelites departed Egypt under Moses' leadership in the greatest mass migration of the ancient world. They went out on the night of the Passover. This event, recorded in Exodus, is commemorated in the Passover feast and marks the birth of Israel as a nation.",
+      "scripture": "Exodus 12:31-51; Exodus 12:40-41",
+      "category": "event", "era": "egypt-exodus", "importance": 1, "type": "event",
+      "concurrent": "Egypt: 18th Dynasty. Likely during reign of Amenhotep II (1450-1425 BC by some dating)",
+      "tags": ["exodus", "egypt", "moses", "israel", "nation", "deliverance", "430 years"]
+    },
+    {
+      "id": "red-sea", "year": -1491, "title": "Crossing the Red Sea",
+      "subtitle": "God Divides the Waters — Egypt's Army Destroyed",
+      "description": "Pharaoh pursued Israel with his army to the edge of the Red Sea (Sea of Reeds). God commanded Moses to stretch his rod over the sea; God sent a strong east wind that divided the waters all night. Israel crossed on dry ground. When Pharaoh's army followed, God released the waters and the entire Egyptian army drowned.",
+      "scripture": "Exodus 14:1-31",
+      "category": "event", "era": "egypt-exodus", "importance": 2, "type": "event",
+      "tags": ["red sea", "crossing", "miracle", "pharaoh", "army", "drowned", "moses"]
+    },
+    {
+      "id": "sinai-law", "year": -1491, "title": "The Law Given at Mount Sinai",
+      "subtitle": "The Ten Commandments and the Mosaic Covenant",
+      "description": "Three months after the Exodus, Israel arrived at Mount Sinai. God descended with thunder, lightning, thick cloud, and fire, and gave Moses the Ten Commandments and the entire Mosaic Law. The law covered moral, civil, and ceremonial aspects of life. It was a conditional covenant ('If you obey... then I will be your God').",
+      "scripture": "Exodus 19-20; Deuteronomy 5",
+      "category": "event", "era": "egypt-exodus", "importance": 1, "type": "event",
+      "tags": ["sinai", "law", "moses", "ten commandments", "covenant", "torah", "god"]
+    },
+    {
+      "id": "tabernacle", "year": -1490, "title": "The Tabernacle Built",
+      "subtitle": "God's Dwelling Among His People",
+      "description": "Following God's detailed instructions, the Israelites constructed the Tabernacle — a portable sanctuary for worship in the wilderness. It consisted of the Outer Court, Holy Place, and Most Holy Place. Filled with the glory of God at its dedication, it foreshadowed the fuller presence of God in Christ and ultimately in the New Jerusalem.",
+      "scripture": "Exodus 25-40; Hebrews 9:1-10",
+      "category": "event", "era": "egypt-exodus", "importance": 2, "type": "event",
+      "tags": ["tabernacle", "worship", "ark of covenant", "sanctuary", "glory", "moses"]
+    },
+    {
+      "id": "wilderness", "year": -1490, "title": "40 Years in the Wilderness",
+      "subtitle": "Rebellion at Kadesh-Barnea — A Generation Wandering",
+      "description": "When the twelve spies returned from Canaan, ten gave a fearful report and the people refused to enter. God decreed that all men 20 years and older (except Caleb and Joshua) would die in the wilderness over 40 years — one year for each day of the spy mission. The wilderness journey included the golden calf, Korah's rebellion, and the bronze serpent.",
+      "scripture": "Numbers 13-14; 1 Corinthians 10:1-11",
+      "category": "event", "era": "egypt-exodus", "importance": 3, "type": "event",
+      "tags": ["wilderness", "spies", "kadesh", "rebellion", "40 years", "caleb", "joshua"]
+    },
+    {
+      "id": "moses-dies", "year": -1451, "title": "Moses Dies — Joshua Leads",
+      "subtitle": "Viewing the Promised Land from Pisgah",
+      "description": "At age 120, Moses climbed Mount Nebo and viewed the Promised Land he would not enter (due to striking the rock at Meribah). God buried him in an unknown location. Joshua son of Nun, filled with the spirit of wisdom, was commissioned to lead Israel across the Jordan River into Canaan.",
+      "scripture": "Deuteronomy 34:1-12; Numbers 20:12",
+      "category": "event", "era": "egypt-exodus", "importance": 2, "type": "event",
+      "tags": ["moses", "death", "joshua", "promised land", "nebo", "120 years"]
+    },
+    {
+      "id": "battle-jericho", "year": -1451, "title": "Battle of Jericho",
+      "subtitle": "The Walls Came Tumbling Down",
+      "description": "Joshua led Israel across the Jordan on dry ground (miraculously parted at flood stage). God commanded them to march around Jericho once daily for six days, then seven times on the seventh day with priests blowing trumpets. At the great shout, Jericho's walls collapsed and Israel took the city — except Rahab and her household.",
+      "scripture": "Joshua 6:1-27; Hebrews 11:30-31",
+      "category": "event", "era": "judges", "importance": 2, "type": "event",
+      "tags": ["jericho", "walls", "joshua", "conquest", "canaan", "rahab", "miracle", "trumpets"]
+    },
+    {
+      "id": "judges-period", "year": -1380, "title": "Period of the Judges",
+      "subtitle": "Every Man Did What Was Right in His Own Eyes",
+      "description": "After Joshua's death, Israel entered a recurring cycle: forsake God → oppression by enemies → cry to God → God raises a judge/deliverer → rest → repeat. Thirteen major judges are recorded, including Deborah, Gideon, Jephthah, and Samson. The period lasted about 350 years until Samuel and the monarchy.",
+      "scripture": "Judges 2:11-23; 21:25",
+      "category": "event", "era": "judges", "importance": 2, "type": "event",
+      "tags": ["judges", "israel", "cycle", "rebellion", "deliverance", "anarchy"]
+    },
+    {
+      "id": "deborah", "year": -1205, "title": "Deborah — Prophetess and Judge",
+      "subtitle": "Israel's Only Female Judge",
+      "description": "Deborah, a prophetess, judged Israel during oppression by Canaanite king Jabin. She summoned Barak to lead the army against Sisera, commander of Jabin's forces. Barak refused to go without Deborah. God gave victory, and Sisera fled to the tent of Jael, who killed him with a tent peg — fulfilling Deborah's prophecy.",
+      "scripture": "Judges 4-5",
+      "category": "judge", "era": "judges", "importance": 3, "type": "person",
+      "tags": ["deborah", "barak", "sisera", "prophetess", "judge", "canaan", "woman"]
+    },
+    {
+      "id": "gideon", "year": -1189, "title": "Gideon — The Mighty Warrior",
+      "subtitle": "300 Men Defeat the Midianite Army",
+      "description": "Gideon was a reluctant judge called by an angel. With only 300 men armed with torches, clay pots, and trumpets, he defeated the vast Midianite army at night — they fled in confusion and slew one another. Gideon refused to become king, declaring 'the LORD shall rule over you.' He later fell into idolatry with the ephod.",
+      "scripture": "Judges 6-8",
+      "category": "judge", "era": "judges", "importance": 2, "type": "person",
+      "tags": ["gideon", "midian", "300", "judge", "fleece", "trumpets", "torches"]
+    },
+    {
+      "id": "samson", "year": -1117, "title": "Samson",
+      "subtitle": "Nazirite Judge with Supernatural Strength",
+      "description": "Samson was a Nazirite from birth, supernaturally strong through the Spirit of God. He judged Israel 20 years and was a one-man terror against the Philistines. Delilah discovered the secret of his strength (his uncut hair), and the Philistines captured and blinded him. At his death he killed more enemies than in his life.",
+      "scripture": "Judges 13-16",
+      "category": "judge", "era": "judges", "importance": 2, "type": "person",
+      "tags": ["samson", "philistines", "delilah", "nazirite", "strength", "judge", "lion", "hair"]
+    },
+    {
+      "id": "ruth", "year": -1100, "title": "Ruth and Boaz",
+      "subtitle": "Loyalty, Redemption, and the Line of David",
+      "description": "Ruth, a Moabite widow, chose to stay with her mother-in-law Naomi after their husbands died, declaring 'Your people shall be my people, and your God my God.' Her loyalty was rewarded when the kinsman-redeemer Boaz married her. She became the great-grandmother of David and is in the lineage of Christ — a Gentile in the messianic line.",
+      "scripture": "Ruth 1-4; Matthew 1:5",
+      "category": "event", "era": "judges", "importance": 2, "type": "event",
+      "tags": ["ruth", "boaz", "naomi", "moab", "redeemer", "david", "gentile", "lineage"]
+    },
+    {
+      "id": "samuel", "year": -1100, "title": "Samuel — Prophet, Priest, and Judge",
+      "subtitle": "The Last Judge and First Prophet",
+      "description": "Samuel was born to Hannah after fervent prayer; she dedicated him to God at the Tabernacle in Shiloh. He heard God's voice as a boy and became the greatest judge and prophet of his era. He anointed both Saul and David as kings and established the school of the prophets.",
+      "scripture": "1 Samuel 1-3; 7:15-17",
+      "category": "judge", "era": "judges", "importance": 2, "type": "person",
+      "tags": ["samuel", "hannah", "shiloh", "prophet", "judge", "priest", "anoint"]
+    },
+    {
+      "id": "saul-anointed", "year": -1050, "title": "Saul Anointed King",
+      "subtitle": "Israel Demands a King Like the Nations",
+      "description": "The elders of Israel rejected God as their king and demanded a human king like the surrounding nations. God granted their request, warning them of the heavy price of monarchy. Samuel anointed Saul, a tall and handsome Benjaminite, as Israel's first king. Saul began well but became disobedient, and God rejected him.",
+      "scripture": "1 Samuel 8-10; 15:23",
+      "category": "king", "era": "united-kingdom", "importance": 2, "type": "person",
+      "concurrent": "Greece: Mycenaean collapse. Phoenicia: Tyre rising as trading power",
+      "tags": ["saul", "king", "israel", "samuel", "monarchy", "benjamin", "anointing"]
+    },
+    {
+      "id": "david-goliath", "year": -1030, "title": "David and Goliath",
+      "subtitle": "The Battle Is the LORD's",
+      "description": "The Philistine champion Goliath, standing over 9 feet tall, challenged Israel to send a champion. Young David, a shepherd boy, refused Saul's armor and met Goliath with five smooth stones and a sling. He struck Goliath in the forehead with one stone, felling him, then cut off his head. Israel routed the Philistines.",
+      "scripture": "1 Samuel 17:1-58",
+      "category": "event", "era": "united-kingdom", "importance": 2, "type": "event",
+      "tags": ["david", "goliath", "giant", "sling", "philistines", "faith", "shepherd", "victory"]
+    },
+    {
+      "id": "david-king", "year": -1010, "title": "David Becomes King",
+      "subtitle": "A Man After God's Own Heart",
+      "description": "After Saul's death at Mount Gilboa, David first reigned over Judah in Hebron for 7.5 years, then over all Israel for 33 years in Jerusalem — 40 years total. God made the Davidic Covenant, promising that David's throne would be established forever and that his descendant would rule eternally.",
+      "scripture": "2 Samuel 5:1-5; 7:8-17; Acts 13:22",
+      "category": "king", "era": "united-kingdom", "importance": 1, "type": "person",
+      "concurrent": "Phoenicia: Hiram I of Tyre allies with David. Egypt: 21st Dynasty (decline)",
+      "tags": ["david", "king", "israel", "jerusalem", "covenant", "throne", "hebron"]
+    },
+    {
+      "id": "jerusalem-capital", "year": -1004, "title": "Jerusalem Made the Capital",
+      "subtitle": "City of David — The Ark Returns",
+      "description": "David captured Jerusalem (then Jebus) from the Jebusites, making it his capital. He brought the Ark of the Covenant into Jerusalem with great celebration. Jerusalem became the political and spiritual center of Israel, and David desired to build a temple there, though God reserved that honor for Solomon.",
+      "scripture": "2 Samuel 5:6-10; 6:1-19",
+      "category": "event", "era": "united-kingdom", "importance": 2, "type": "event",
+      "tags": ["jerusalem", "capital", "ark", "david", "jebusites", "zion", "city of david"]
+    },
+    {
+      "id": "solomons-temple", "year": -966, "title": "Solomon's Temple Built",
+      "subtitle": "God's House on Mount Moriah — 7 Years to Build",
+      "description": "Solomon built the first Temple in Jerusalem on Mount Moriah (where Abraham had nearly sacrificed Isaac). It took 7 years to complete with 30,000 forced laborers and Phoenician craftsmen. It was overlaid with pure gold. At its dedication, the glory of God filled the Temple so powerfully that the priests could not minister.",
+      "scripture": "1 Kings 6-8; 2 Chronicles 7:1-3",
+      "category": "event", "era": "united-kingdom", "importance": 1, "type": "event",
+      "concurrent": "Phoenicia: Hiram I of Tyre provides cedar and craftsmen. Egypt: Weak 21st/22nd Dynasty",
+      "tags": ["temple", "solomon", "jerusalem", "moriah", "gold", "glory", "dedication", "worship"]
+    },
+    {
+      "id": "solomon-king", "year": -970, "title": "Solomon Becomes King",
+      "subtitle": "Wisest Man — Builder of the Temple",
+      "description": "Solomon, David's son by Bathsheba, became king at David's death. He asked God for wisdom rather than wealth, and God granted him unparalleled wisdom plus riches and honor. He wrote Proverbs, Ecclesiastes, and Song of Solomon. The Queen of Sheba visited. Israel reached its greatest geographical extent under his reign.",
+      "scripture": "1 Kings 2-11; 3:5-12",
+      "category": "king", "era": "united-kingdom", "importance": 2, "type": "person",
+      "tags": ["solomon", "wisdom", "temple", "proverbs", "queen of sheba", "gold", "king"]
+    },
+    {
+      "id": "kingdom-divided", "year": -931, "title": "Kingdom Divided",
+      "subtitle": "Ten Tribes to Jeroboam — Two to Rehoboam",
+      "description": "When Solomon died, his son Rehoboam refused to lighten the heavy tax burden. Ten tribes rebelled under Jeroboam I and formed the Northern Kingdom of Israel (capital: Samaria). Rehoboam retained Judah and Benjamin as the Southern Kingdom of Judah (capital: Jerusalem). This division lasted until Assyria destroyed Israel in 722 BC.",
+      "scripture": "1 Kings 12:1-24",
+      "category": "event", "era": "divided-kingdom", "importance": 1, "type": "event",
+      "concurrent": "Egypt: Shishak (Sheshonq I) invades Judah (1 Kings 14:25). Phoenicia: strong trading",
+      "tags": ["divided kingdom", "rehoboam", "jeroboam", "israel", "judah", "ten tribes", "schism"]
+    },
+    {
+      "id": "elijah", "year": -874, "title": "Elijah the Prophet",
+      "subtitle": "Showdown on Mount Carmel",
+      "description": "During the wicked reign of Ahab and Jezebel in Israel, God raised up the prophet Elijah. He declared a 3.5-year drought, raised the widow's son, and called down fire from heaven on Mount Carmel in a dramatic confrontation with 450 prophets of Baal. He was later fed by angels, heard the still small voice of God, and was translated to heaven in a fiery chariot.",
+      "scripture": "1 Kings 17-19; 2 Kings 2; James 5:17",
+      "category": "prophet", "era": "divided-kingdom", "importance": 2, "type": "person",
+      "concurrent": "Assyria: Shalmaneser III expanding westward",
+      "tags": ["elijah", "carmel", "baal", "ahab", "jezebel", "drought", "fire", "chariot", "translation"]
+    },
+    {
+      "id": "elisha", "year": -848, "title": "Elisha the Prophet",
+      "subtitle": "Double Portion of Elijah's Spirit — 16 Miracles",
+      "description": "Elisha received a double portion of Elijah's spirit and performed more recorded miracles than any OT prophet (16 miracles). Notable: parting the Jordan, purifying Jericho's water, raising the Shunammite's son, healing Naaman the leper, and feeding 100 men with 20 loaves. He ministered for about 50 years.",
+      "scripture": "2 Kings 2-13",
+      "category": "prophet", "era": "divided-kingdom", "importance": 2, "type": "person",
+      "tags": ["elisha", "miracles", "naaman", "prophet", "israel", "double portion"]
+    },
+    {
+      "id": "jonah", "year": -786, "title": "Jonah and Nineveh",
+      "subtitle": "The Great Fish — City Repents",
+      "description": "God called Jonah to preach repentance to Nineveh (Assyria's capital). Jonah fled by ship to Tarshish. A great storm arose; the sailors threw Jonah overboard and God appointed a great fish to swallow him for three days and nights — a type of Christ's death and resurrection. Jonah preached in Nineveh and the entire city repented.",
+      "scripture": "Jonah 1-4; Matthew 12:40",
+      "category": "prophet", "era": "divided-kingdom", "importance": 2, "type": "person",
+      "tags": ["jonah", "nineveh", "fish", "repentance", "resurrection type", "assyria", "preaching"]
+    },
+    {
+      "id": "isaiah", "year": -740, "title": "Isaiah the Prophet",
+      "subtitle": "The Messianic Prophet — 'The Fifth Gospel'",
+      "description": "Isaiah ministered for about 60 years in Judah. He recorded more prophecies of Christ's first and second comings than any other OT prophet: born of a virgin (7:14), Galilee of the Gentiles (9:1-2), suffering servant (53), the Spirit-anointed servant (61:1). His vision of God's holiness in Chapter 6 is foundational to all biblical theology.",
+      "scripture": "Isaiah 6:1; 7:14; 9:6-7; 53:1-12; 61:1-3",
+      "category": "prophet", "era": "divided-kingdom", "importance": 2, "type": "person",
+      "concurrent": "Assyria at height of power under Tiglath-Pileser III",
+      "tags": ["isaiah", "messiah", "virgin", "suffering servant", "prophecy", "judah", "holy"]
+    },
+    {
+      "id": "fall-samaria", "year": -722, "title": "Fall of Samaria — Israel Captive to Assyria",
+      "subtitle": "Northern Kingdom Falls After 19 Wicked Kings",
+      "description": "After 209 years of uninterrupted apostasy and 19 consecutive wicked kings, God allowed Assyria's Shalmaneser V (then Sargon II) to capture Samaria. The Israelites were deported to Assyria and foreign peoples were resettled in the land — producing the mixed-race Samaritans. This fulfilled Moses' warnings in Deuteronomy 28.",
+      "scripture": "2 Kings 17:1-23",
+      "category": "event", "era": "judah-alone", "importance": 1, "type": "event",
+      "concurrent": "Assyria: Sargon II. Greece: City-states forming. Rome: traditional founding date 753 BC",
+      "tags": ["samaria", "fall", "assyria", "israel", "captivity", "ten tribes", "exile", "sargon"]
+    },
+    {
+      "id": "hezekiah", "year": -715, "title": "Hezekiah — Righteous King of Judah",
+      "subtitle": "Assyrian Army Destroyed Overnight",
+      "description": "Hezekiah was one of Judah's greatest kings. He reopened and cleansed the Temple, restored Passover, and destroyed Asherah poles. When Sennacherib's 185,000-man Assyrian army besieged Jerusalem, Hezekiah prayed and the Angel of the LORD killed all 185,000 in one night. Hezekiah also built the famous water tunnel (Siloam Tunnel) still visible today.",
+      "scripture": "2 Kings 18-20; Isaiah 37-38",
+      "category": "king", "era": "judah-alone", "importance": 2, "type": "person",
+      "tags": ["hezekiah", "judah", "assyria", "sennacherib", "prayer", "angel", "siloam", "righteous king"]
+    },
+    {
+      "id": "jeremiah", "year": -627, "title": "Jeremiah the Prophet",
+      "subtitle": "The Weeping Prophet — Predicts 70 Years Captivity",
+      "description": "Jeremiah ministered for 40 years in Jerusalem, warning of Babylonian captivity for Judah's sin. He was imprisoned, thrown in a cistern, and rejected by his own people. He predicted the 70-year captivity (29:10) and the New Covenant written on the heart (31:31-34). He wept over Jerusalem's sins and her coming destruction.",
+      "scripture": "Jeremiah 1:1; 29:10; 31:31-34; Lamentations",
+      "category": "prophet", "era": "judah-alone", "importance": 2, "type": "person",
+      "tags": ["jeremiah", "babylon", "captivity", "70 years", "new covenant", "weeping", "lamentations"]
+    },
+    {
+      "id": "babylon-captivity-1", "year": -605, "title": "First Babylonian Captivity",
+      "subtitle": "Daniel and Others Taken to Babylon",
+      "description": "Nebuchadnezzar king of Babylon invaded Judah and took the first group of captives — including Daniel, Hananiah, Mishael, and Azariah (Shadrach, Meshach, Abednego) — to Babylon. This began the 70-year captivity predicted by Jeremiah. Nebuchadnezzar also carried away some of the temple vessels.",
+      "scripture": "Daniel 1:1-6; 2 Chronicles 36:6-7; Jeremiah 25:1",
+      "category": "event", "era": "captivity-return", "importance": 2, "type": "event",
+      "concurrent": "Babylon: Nebuchadnezzar's empire at its height. Egypt: 26th Dynasty (Necho II)",
+      "tags": ["babylon", "captivity", "daniel", "nebuchadnezzar", "judah", "exile", "70 years"]
+    },
+    {
+      "id": "fall-jerusalem", "year": -586, "title": "Jerusalem Falls — Temple Destroyed",
+      "subtitle": "Judah's Final Destruction by Nebuchadnezzar",
+      "description": "After a long siege, Babylon broke through Jerusalem's walls. Zedekiah (the last king) was blinded after watching his sons killed. Solomon's Temple was completely destroyed and burned. The remaining population was taken captive to Babylon. Jerusalem was left in ruins. This ended 400+ years of the Davidic monarchy in Jerusalem.",
+      "scripture": "2 Kings 25:1-21; Lamentations 1-5",
+      "category": "event", "era": "captivity-return", "importance": 1, "type": "event",
+      "tags": ["jerusalem", "destruction", "temple", "babylon", "nebuchadnezzar", "exile", "zedekiah", "lamentations"]
+    },
+    {
+      "id": "daniel-babylon", "year": -605, "title": "Daniel in Babylon",
+      "subtitle": "Steadfast Faithfulness in a Foreign Land",
+      "description": "Daniel remained faithful to God for over 70 years in Babylon. He interpreted Nebuchadnezzar's dreams (the great statue, the four world empires), refused to bow to the golden image, survived the lions' den under Darius the Mede, and received visions of the last days including the 70 Weeks of Daniel — one of Scripture's most precise prophecies.",
+      "scripture": "Daniel 1-12; 9:24-27",
+      "category": "prophet", "era": "captivity-return", "importance": 2, "type": "person",
+      "tags": ["daniel", "babylon", "lion's den", "70 weeks", "prophecy", "nebuchadnezzar", "statue", "faithfulness"]
+    },
+    {
+      "id": "ezekiel", "year": -597, "title": "Ezekiel the Prophet",
+      "subtitle": "Visions of God's Glory and Israel's Restoration",
+      "description": "Ezekiel was taken captive to Babylon with King Jehoiachin and ministered there by the Chebar canal. He received dramatic visions of God's glory (the four living creatures and wheels), pronounced judgment on Israel, and prophesied Israel's future restoration (the valley of dry bones, the millennial Temple). He is considered the father of apocalyptic prophecy.",
+      "scripture": "Ezekiel 1:1-28; 37:1-14; 40-48",
+      "category": "prophet", "era": "captivity-return", "importance": 2, "type": "person",
+      "tags": ["ezekiel", "babylon", "vision", "glory", "dry bones", "restoration", "temple", "millennial"]
+    },
+    {
+      "id": "cyrus-decree", "year": -538, "title": "Cyrus's Decree — Return to Jerusalem",
+      "subtitle": "Named by Isaiah 150 Years Before His Birth",
+      "description": "In the first year of Cyrus king of Persia, God stirred his heart to proclaim that the Jews could return to Jerusalem and rebuild the Temple. Isaiah had prophesied Cyrus by name 150 years earlier (Isa. 44:28; 45:1). This fulfilled Jeremiah's 70-year prophecy. Cyrus also returned the Temple vessels taken by Nebuchadnezzar.",
+      "scripture": "Ezra 1:1-11; Isaiah 44:28; 45:1; Jeremiah 29:10",
+      "category": "event", "era": "captivity-return", "importance": 2, "type": "event",
+      "concurrent": "Persia: Cyrus the Great — founder of the Achaemenid Empire",
+      "tags": ["cyrus", "persia", "return", "decree", "isaiah", "prophecy", "temple", "70 years"]
+    },
+    {
+      "id": "second-temple", "year": -516, "title": "Second Temple Completed",
+      "subtitle": "Rebuilt Under Zerubbabel — 20 Years After Cyrus's Decree",
+      "description": "After opposition delayed the work, the prophets Haggai and Zechariah stirred the people to resume building. The Second Temple was completed on the third day of Adar in the sixth year of Darius — 70 years after Solomon's Temple was destroyed. Elderly Jews who had seen the first Temple wept; others shouted for joy.",
+      "scripture": "Ezra 6:15; Haggai 1-2; Zechariah 4:9",
+      "category": "event", "era": "captivity-return", "importance": 2, "type": "event",
+      "tags": ["temple", "zerubbabel", "haggai", "zechariah", "persia", "restoration", "second temple"]
+    },
+    {
+      "id": "esther", "year": -479, "title": "Esther Saves the Jewish People",
+      "subtitle": "For Such a Time as This",
+      "description": "Esther, a Jewish orphan raised by her cousin Mordecai, became queen of Persia under Ahasuerus (Xerxes). The wicked official Haman plotted genocide against all Jews in the Persian Empire. Mordecai urged Esther to act: 'Who knows whether you have not come to the kingdom for such a time as this?' Esther fasted, interceded, and exposed Haman's plot. Haman was hanged on his own gallows.",
+      "scripture": "Esther 1-10",
+      "category": "event", "era": "captivity-return", "importance": 2, "type": "event",
+      "tags": ["esther", "mordecai", "haman", "persia", "purim", "genocide", "deliverance", "queen"]
+    },
+    {
+      "id": "ezra", "year": -458, "title": "Ezra Returns to Jerusalem",
+      "subtitle": "Restoring the Law and True Worship",
+      "description": "Ezra, a skilled scribe in the Law of Moses, returned from Babylon to Jerusalem with about 1,500 men in the 7th year of Artaxerxes I. He reformed the people's syncretistic marriages, re-established teaching of the Law, and restored proper Temple worship. He is credited with editing and compiling much of the Hebrew Scriptures.",
+      "scripture": "Ezra 7-10; Nehemiah 8",
+      "category": "event", "era": "captivity-return", "importance": 2, "type": "event",
+      "tags": ["ezra", "scribe", "law", "restoration", "artaxerxes", "persia", "torah", "reform"]
+    },
+    {
+      "id": "nehemiah", "year": -444, "title": "Nehemiah Rebuilds Jerusalem's Walls",
+      "subtitle": "52 Days of Building Despite Opposition",
+      "description": "Nehemiah, cupbearer to Artaxerxes I, wept when he heard Jerusalem's walls were in ruins. He received permission to rebuild and led the effort, completing the walls in just 52 days despite intense opposition from Sanballat and Tobiah. This event begins the 70 Weeks of Daniel countdown to the Messiah (483 years to Palm Sunday).",
+      "scripture": "Nehemiah 2:1-8; 6:15; Daniel 9:25",
+      "category": "event", "era": "captivity-return", "importance": 2, "type": "event",
+      "tags": ["nehemiah", "walls", "jerusalem", "52 days", "daniel", "70 weeks", "artaxerxes", "rebuilding"]
+    },
+    {
+      "id": "malachi", "year": -430, "title": "Malachi — Last Old Testament Prophet",
+      "subtitle": "400 Years of Silence Until John the Baptist",
+      "description": "Malachi was the last OT prophet, closing the OT canon with a warning of judgment and a promise of Elijah's return before 'the great and dreadful day of the LORD.' After Malachi, there was 400 years of prophetic silence until John the Baptist. The OT ends with a curse; the NT begins with grace.",
+      "scripture": "Malachi 4:5-6; Luke 1:17",
+      "category": "prophet", "era": "captivity-return", "importance": 2, "type": "person",
+      "concurrent": "Greece: Golden Age of Pericles ending. Persia: Artaxerxes I reign",
+      "tags": ["malachi", "prophet", "silence", "400 years", "elijah", "OT close", "curse", "messenger"]
+    },
+    {
+      "id": "alexander-great", "year": -336, "title": "Alexander the Great",
+      "subtitle": "Greece Conquers the World in 13 Years",
+      "description": "Alexander III of Macedonia conquered the Persian Empire, Egypt, Palestine, and extended Greek rule to India in just 13 years. He spread the Greek language (Koine Greek) throughout the known world — the very language God chose for the New Testament. Daniel's vision of the 'swift-moving goat' (the Greek empire) was precisely fulfilled by Alexander.",
+      "scripture": "Daniel 8:5-8; 11:3-4",
+      "category": "empire", "era": "silent-period", "importance": 2, "type": "person",
+      "concurrent": "Palestine: Under Greek rule; Hellenistic influence spreading. Alexandria founded 331 BC",
+      "tags": ["alexander", "greece", "hellenism", "koine greek", "daniel", "empire", "prophecy"]
+    },
+    {
+      "id": "septuagint", "year": -285, "title": "Septuagint (LXX) Translated",
+      "subtitle": "Hebrew Bible into Greek — Used by Jesus and NT Authors",
+      "description": "Ptolemy II Philadelphus commissioned 70-72 Jewish scholars to translate the Hebrew Scriptures into Koine Greek in Alexandria, Egypt. This translation, called the Septuagint (LXX), became the Bible of the early church. Jesus and the NT writers frequently quote from it. It preserved the OT in the universal language of the ancient world.",
+      "scripture": null,
+      "category": "event", "era": "silent-period", "importance": 2, "type": "event",
+      "tags": ["septuagint", "LXX", "greek", "bible", "translation", "alexandria", "ptolemy", "scripture"]
+    },
+    {
+      "id": "maccabees", "year": -168, "title": "Maccabean Revolt & Hanukkah",
+      "subtitle": "Temple Desecrated by Antiochus — Jewish Revolt Succeeds",
+      "description": "Antiochus IV Epiphanes ('Antiochus the Madman') desecrated the Jerusalem Temple by sacrificing a pig on the altar and erecting a statue of Zeus — the 'abomination of desolation' (foreshadowing Antichrist). The Maccabee family led a successful revolt, recaptured the Temple, and rededicated it in 164 BC — commemorated in Hanukkah (John 10:22, the Feast of Dedication).",
+      "scripture": "Daniel 8:9-14; 11:31; John 10:22",
+      "category": "event", "era": "silent-period", "importance": 2, "type": "event",
+      "tags": ["maccabees", "antiochus", "hanukkah", "temple", "abomination", "revolt", "daniel", "dedication"]
+    },
+    {
+      "id": "roman-empire", "year": -63, "title": "Rome Conquers Judea",
+      "subtitle": "Pompey Enters Jerusalem — Roman Rule Begins",
+      "description": "Roman general Pompey captured Jerusalem in 63 BC after a siege, entering even the Holy of Holies (though he took nothing). Judea became a Roman client state. Rome's rule provided the 'fullness of time' for Christ's coming: Roman roads for rapid travel, Roman law for Paul's trials and appeals, and Pax Romana allowing peaceful spread of the Gospel.",
+      "scripture": "Galatians 4:4",
+      "category": "empire", "era": "silent-period", "importance": 2, "type": "event",
+      "tags": ["rome", "pompey", "judea", "roman empire", "fullness of time", "gospel", "roads"]
+    },
+    {
+      "id": "herod-great", "year": -37, "title": "Herod the Great",
+      "subtitle": "Client King of Judea — Rebuilds the Temple",
+      "description": "Herod the Great was appointed king of Judea by Rome. He was a brilliant but brutal ruler who massively expanded the Second Temple into one of the ancient world's most magnificent structures. He massacred the infants in Bethlehem after the Magi's visit. He died in 4 BC, shortly after the birth of Jesus.",
+      "scripture": "Matthew 2:1-18",
+      "category": "king", "era": "silent-period", "importance": 2, "type": "person",
+      "concurrent": "Rome: Julius Caesar assassinated 44 BC. Octavian becomes Augustus Caesar 27 BC",
+      "tags": ["herod", "judea", "temple", "rome", "magi", "massacre", "bethlehem"]
+    },
+    {
+      "id": "birth-jesus", "year": -5, "title": "Birth of Jesus Christ",
+      "subtitle": "God Incarnate — Born in Bethlehem of a Virgin",
+      "description": "Jesus of Nazareth was born in Bethlehem of the virgin Mary, conceived by the Holy Spirit. Angels announced His birth to shepherds; the star led Magi from the east. He is fully God and fully man — the eternal Word made flesh. His birth fulfills over 300 OT prophecies including: born of a virgin (Isa. 7:14), born in Bethlehem (Mic. 5:2), of the line of David (2 Sam. 7:12).",
+      "scripture": "Matthew 1:18-25; Luke 2:1-20; John 1:14; Isaiah 7:14; Micah 5:2",
+      "category": "event", "era": "life-of-christ", "importance": 1, "type": "event",
+      "concurrent": "Rome: Augustus Caesar (27 BC – AD 14). Pax Romana. Roman census ordered",
+      "tags": ["jesus", "birth", "bethlehem", "virgin", "incarnation", "magi", "shepherds", "christmas", "messiah"]
+    },
+    {
+      "id": "jesus-baptism", "year": 27, "title": "Baptism of Jesus",
+      "subtitle": "The Trinity Revealed — This Is My Beloved Son",
+      "description": "At approximately age 30, Jesus was baptized by John the Baptist in the Jordan River. The heavens opened, the Holy Spirit descended as a dove, and the Father's voice declared 'This is My beloved Son, in whom I am well pleased.' This inaugurated Jesus's public ministry and clearly revealed the Trinity.",
+      "scripture": "Matthew 3:13-17; Mark 1:9-11; Luke 3:21-22",
+      "category": "event", "era": "life-of-christ", "importance": 2, "type": "event",
+      "tags": ["jesus", "baptism", "john", "jordan", "trinity", "father", "spirit", "son", "dove"]
+    },
+    {
+      "id": "sermon-mount", "year": 28, "title": "Sermon on the Mount",
+      "subtitle": "The Constitution of the Kingdom of God",
+      "description": "Jesus delivered the Sermon on the Mount — the greatest discourse in human history. It includes the Beatitudes, the Lord's Prayer, 'love your enemies,' 'turn the other cheek,' 'seek first the kingdom of God,' and the Golden Rule. It reveals the spiritual depth of God's law and the character of those who belong to God's kingdom.",
+      "scripture": "Matthew 5-7",
+      "category": "event", "era": "life-of-christ", "importance": 2, "type": "event",
+      "tags": ["jesus", "sermon", "beatitudes", "kingdom", "lord's prayer", "law", "ethics", "mountain"]
+    },
+    {
+      "id": "crucifixion", "year": 30, "title": "Crucifixion of Jesus Christ",
+      "subtitle": "The Lamb of God Takes Away the Sin of the World",
+      "description": "Jesus was betrayed by Judas for 30 pieces of silver, arrested in Gethsemane, tried before Pilate and Herod, sentenced despite innocence, flogged, crowned with thorns, and crucified on a Roman cross at Golgotha. Darkness covered the land for three hours; the Temple veil tore from top to bottom. He died bearing the sins of the world — the perfect substitutionary sacrifice.",
+      "scripture": "Matthew 26-27; Isaiah 53:5-6; 1 Peter 2:24; 2 Corinthians 5:21",
+      "category": "event", "era": "life-of-christ", "importance": 1, "type": "event",
+      "concurrent": "Rome: Emperor Tiberius (AD 14-37). Pontius Pilate governor of Judea",
+      "tags": ["crucifixion", "jesus", "cross", "death", "atonement", "sin", "sacrifice", "golgotha", "salvation"]
+    },
+    {
+      "id": "resurrection", "year": 30, "title": "Resurrection of Jesus Christ",
+      "subtitle": "He Is Risen — Death Is Defeated",
+      "description": "On the third day after His crucifixion, Jesus rose bodily from the dead. The stone was rolled away; the grave clothes were left folded. He appeared to Mary Magdalene, the disciples (multiple times), over 500 people at once (1 Cor. 15:6), and finally to Paul. His resurrection is the cornerstone of Christianity — if Christ is not raised, our faith is vain.",
+      "scripture": "Matthew 28:1-10; 1 Corinthians 15:3-8; Romans 1:4",
+      "category": "event", "era": "life-of-christ", "importance": 1, "type": "event",
+      "tags": ["resurrection", "jesus", "risen", "empty tomb", "victory", "death defeated", "bodily", "easter"]
+    },
+    {
+      "id": "ascension", "year": 30, "title": "Ascension of Jesus",
+      "subtitle": "Taken Up into Heaven — Coming Again the Same Way",
+      "description": "Forty days after His resurrection, Jesus led His disciples to the Mount of Olives. He gave the Great Commission, promised the Holy Spirit, and was taken up into heaven as the disciples watched. A cloud received Him out of their sight. Two angels appeared and promised He would return the same way He left.",
+      "scripture": "Acts 1:1-11; Luke 24:50-53",
+      "category": "event", "era": "life-of-christ", "importance": 2, "type": "event",
+      "tags": ["ascension", "jesus", "heaven", "great commission", "return", "second coming", "cloud"]
+    },
+    {
+      "id": "pentecost", "year": 30, "title": "Pentecost — The Church Begins",
+      "subtitle": "The Holy Spirit Poured Out — 3,000 Saved",
+      "description": "Fifty days after Passover (Jesus's crucifixion), on the Jewish feast of Pentecost, the promised Holy Spirit was poured out on the 120 disciples in Jerusalem. Tongues of fire appeared; they spoke in other languages. Peter preached and 3,000 were baptized and added to the church that day. This marks the birth of the New Testament church.",
+      "scripture": "Acts 2:1-41; Joel 2:28-32",
+      "category": "event", "era": "early-church", "importance": 1, "type": "event",
+      "tags": ["pentecost", "holy spirit", "church", "3000", "tongues", "fire", "peter", "birth of church"]
+    },
+    {
+      "id": "paul-conversion", "year": 35, "title": "Conversion of the Apostle Paul",
+      "subtitle": "Saul the Persecutor Becomes Paul the Apostle",
+      "description": "Saul of Tarsus was the most zealous persecutor of the early church. On the road to Damascus, the risen Jesus appeared to him in blinding light and called him by name. Saul was blinded for three days, then restored by Ananias. He became Paul — the greatest apostle to the Gentiles, writing 13 NT epistles and planting churches across the Roman Empire.",
+      "scripture": "Acts 9:1-22; Galatians 1:11-17; 1 Corinthians 15:8",
+      "category": "apostle", "era": "early-church", "importance": 2, "type": "person",
+      "tags": ["paul", "saul", "damascus", "conversion", "apostle", "gentiles", "persecutor", "church"]
+    },
+    {
+      "id": "jerusalem-council", "year": 50, "title": "Jerusalem Council",
+      "subtitle": "Gentiles Saved by Grace Through Faith Alone",
+      "description": "Controversy arose over whether Gentile believers must be circumcised and keep the Mosaic law. The apostles and elders met in Jerusalem — the first church council. Peter testified of Cornelius's conversion; Paul and Barnabas reported their Gentile mission. James delivered the verdict: Gentiles are saved by grace through faith alone, not by keeping the Law.",
+      "scripture": "Acts 15:1-35; Galatians 2:1-10",
+      "category": "event", "era": "early-church", "importance": 2, "type": "event",
+      "tags": ["jerusalem council", "gentiles", "circumcision", "grace", "law", "paul", "james", "peter"]
+    },
+    {
+      "id": "fall-jerusalem-70", "year": 70, "title": "Destruction of Jerusalem — Temple Destroyed",
+      "subtitle": "Jesus's Prophecy Fulfilled — Not One Stone on Another",
+      "description": "Roman general Titus besieged and destroyed Jerusalem. The Temple was completely burned — soldiers pried apart even the gold-covered stones to retrieve melted gold. Over 1 million Jews perished; 97,000 were enslaved. This precisely fulfilled Jesus's prophecy (Matt. 24:2) that not one stone of the Temple would remain on another, and ended the Old Covenant sacrificial system forever.",
+      "scripture": "Matthew 24:1-2; Luke 19:41-44; 21:20-24",
+      "category": "event", "era": "early-church", "importance": 1, "type": "event",
+      "concurrent": "Rome: Emperor Vespasian. Titus commands the siege. Arch of Titus in Rome commemorates it",
+      "tags": ["jerusalem", "temple", "titus", "rome", "70 AD", "prophecy", "destruction", "fulfilled", "dispersion"]
+    },
+    {
+      "id": "johns-revelation", "year": 95, "title": "John's Revelation on Patmos",
+      "subtitle": "The Last Book of the Bible — The Last Apostle",
+      "description": "The Apostle John, the last living apostle, was exiled to the island of Patmos under Emperor Domitian's persecution. There he received the Revelation of Jesus Christ — apocalyptic visions of the end times, the tribulation, the Second Coming, the Millennium, and the New Jerusalem. It closes the biblical canon with 'Come, Lord Jesus.'",
+      "scripture": "Revelation 1:9-11; 22:20",
+      "category": "apostle", "era": "early-church", "importance": 2, "type": "event",
+      "concurrent": "Rome: Emperor Domitian's persecution of Christians",
+      "tags": ["john", "revelation", "patmos", "prophecy", "end times", "tribulation", "second coming", "canon"]
+    },
+    {
+      "id": "edict-milan", "year": 313, "title": "Edict of Milan",
+      "subtitle": "Constantine Legalizes Christianity — Persecution Ends",
+      "description": "Emperor Constantine and Licinius issued the Edict of Milan, granting religious freedom throughout the Roman Empire and ending 300 years of Christian persecution. Constantine claimed conversion after seeing a cross in the sky before the Battle of Milvian Bridge. Christianity became the favored religion of the empire — opening opportunities but also introducing worldly compromise.",
+      "scripture": null,
+      "category": "church", "era": "church-age", "importance": 2, "type": "event",
+      "concurrent": "Rome: Constantine rules as sole emperor from 324 AD. Capital later moved to Constantinople (330 AD)",
+      "tags": ["constantine", "edict of milan", "persecution ends", "rome", "christianity", "church", "religious freedom"]
+    },
+    {
+      "id": "council-nicaea", "year": 325, "title": "Council of Nicaea",
+      "subtitle": "The Trinity Defined — Arianism Condemned",
+      "description": "Constantine convened the first ecumenical church council at Nicaea to settle the Arian controversy (Arius denied Christ's full divinity). Over 300 bishops attended. The council affirmed that Jesus is 'of the same substance' (homoousios) as the Father — fully God. The Nicene Creed remains a foundational statement of Christian orthodoxy to this day.",
+      "scripture": "John 1:1; 10:30; Colossians 2:9",
+      "category": "church", "era": "church-age", "importance": 2, "type": "event",
+      "tags": ["nicaea", "council", "trinity", "arius", "creed", "constantine", "homoousios", "christ's divinity"]
+    },
+    {
+      "id": "vulgate", "year": 405, "title": "Jerome's Latin Vulgate Bible",
+      "subtitle": "The Bible in the Common Language of the Roman Empire",
+      "description": "Jerome translated the entire Bible from Hebrew and Greek into Latin at the request of Pope Damasus I. His Vulgate ('common language') version became the standard Bible of the Western church for over 1,000 years. Though later questioned by Reformers (who went back to original languages), it preserved Scripture through the medieval period.",
+      "scripture": null,
+      "category": "church", "era": "church-age", "importance": 2, "type": "event",
+      "tags": ["jerome", "vulgate", "latin", "bible", "translation", "scripture", "rome", "western church"]
+    },
+    {
+      "id": "fall-western-rome", "year": 476, "title": "Fall of Western Roman Empire",
+      "subtitle": "Odoacer Deposes the Last Western Emperor",
+      "description": "Odoacer, a Germanic chieftain, deposed Romulus Augustulus — the last Western Roman Emperor. This ended 500 years of Roman imperial rule in the West and marked the beginning of the Middle Ages. The Eastern Roman Empire (Byzantine) continued until 1453. The Church increasingly filled the power vacuum left by Rome's collapse.",
+      "scripture": "Daniel 2:40-43",
+      "category": "empire", "era": "church-age", "importance": 2, "type": "event",
+      "concurrent": "Beginning of the medieval period. Germanic kingdoms carve up Western Europe",
+      "tags": ["rome", "fall", "476", "middle ages", "barbarians", "empire", "western"]
+    },
+    {
+      "id": "mohammed", "year": 570, "title": "Birth of Mohammed",
+      "subtitle": "Islam Founded — Rival to Biblical Christianity",
+      "description": "Mohammed was born in Mecca, Arabia. At age 40 he claimed revelations from the angel Gabriel and began preaching monotheism. He died in 632 AD. His followers spread Islam rapidly by conquest across the Middle East, North Africa, Persia, and Spain. Islam denies the Trinity, the crucifixion, and the resurrection — presenting a fundamentally different Christ.",
+      "scripture": null,
+      "category": "event", "era": "church-age", "importance": 2, "type": "person",
+      "concurrent": "Byzantine Empire: Heraclius. Arabia: pre-Islamic period ending",
+      "tags": ["mohammed", "islam", "mecca", "religion", "quran", "rival", "world history"]
+    },
+    {
+      "id": "great-schism", "year": 1054, "title": "Great Schism — Eastern & Western Church Split",
+      "subtitle": "Rome and Constantinople Excommunicate Each Other",
+      "description": "The Great Schism of 1054 formally split Christianity into Roman Catholicism (West) and Eastern Orthodoxy (East). Disputes over papal authority, the filioque clause (whether the Spirit proceeds from the Father alone or from Father and Son), and cultural differences drove the separation. The split has never been formally healed.",
+      "scripture": null,
+      "category": "church", "era": "church-age", "importance": 2, "type": "event",
+      "tags": ["schism", "rome", "constantinople", "catholic", "orthodox", "split", "1054", "pope"]
+    },
+    {
+      "id": "printing-press", "year": 1450, "title": "Gutenberg's Printing Press",
+      "subtitle": "The Bible Mass-Produced — Information Revolution",
+      "description": "Johannes Gutenberg invented movable-type printing in Mainz, Germany. His first major printed work was the Gutenberg Bible (c. 1455). This made the Bible — and other texts — affordable and widely accessible for the first time in history. It directly enabled the Protestant Reformation by allowing Luther's writings and the Bible to spread rapidly across Europe.",
+      "scripture": null,
+      "category": "event", "era": "church-age", "importance": 2, "type": "event",
+      "tags": ["gutenberg", "printing press", "bible", "reformation", "information", "literacy", "germany"]
+    },
+    {
+      "id": "fall-constantinople", "year": 1453, "title": "Fall of Constantinople",
+      "subtitle": "Byzantine Empire Falls — Ottoman Empire Rises",
+      "description": "Ottoman Sultan Mehmed II conquered Constantinople with 80,000 troops and cannons, ending the 1,000-year Byzantine (Eastern Roman) Empire. Greek scholars fled west with their manuscripts, catalyzing the Renaissance and bringing Greek NT texts to Western Europe — directly contributing to the Reformation's return to original languages.",
+      "scripture": null,
+      "category": "empire", "era": "church-age", "importance": 2, "type": "event",
+      "concurrent": "Europe: Renaissance. Greek scholars flee west with classical texts",
+      "tags": ["constantinople", "byzantine", "ottoman", "1453", "fall", "renaissance", "greek texts"]
+    },
+    {
+      "id": "reformation", "year": 1517, "title": "Protestant Reformation — Luther's 95 Theses",
+      "subtitle": "Scripture Alone — Grace Alone — Faith Alone",
+      "description": "On October 31, 1517, Martin Luther nailed his 95 Theses to the Wittenberg church door, challenging the Roman Catholic sale of indulgences. Fueled by Gutenberg's press, his writings spread across Europe in weeks. The Reformation recovered five solas: Scripture alone (Sola Scriptura), Grace alone, Faith alone, Christ alone, Glory to God alone — truths buried for nearly 1,000 years.",
+      "scripture": "Romans 1:17; Ephesians 2:8-9; Galatians 3:11",
+      "category": "reformation", "era": "reformation-modern", "importance": 1, "type": "event",
+      "concurrent": "Europe: Renaissance. Spanish exploration of Americas underway",
+      "tags": ["reformation", "luther", "95 theses", "sola scriptura", "grace", "faith", "protestant", "wittenberg"]
+    },
+    {
+      "id": "tyndale-bible", "year": 1526, "title": "Tyndale's English New Testament",
+      "subtitle": "Every Ploughboy Shall Know the Scriptures",
+      "description": "William Tyndale published the first printed English New Testament translated directly from Greek, smuggling copies into England. He was later strangled and burned at the stake for it. His dying prayer: 'Lord, open the king of England's eyes.' 90% of the King James Bible comes from Tyndale's translation. He is the father of the English Bible.",
+      "scripture": null,
+      "category": "reformation", "era": "reformation-modern", "importance": 2, "type": "person",
+      "tags": ["tyndale", "bible", "english", "new testament", "martyr", "translation", "reformation", "KJV"]
+    },
+    {
+      "id": "kjv-bible", "year": 1611, "title": "King James Bible Published",
+      "subtitle": "The Most Influential Book in the English Language",
+      "description": "King James I of England commissioned 47 scholars to produce a new English translation. The King James Version, published in 1611, drew heavily on Tyndale and used the Textus Receptus (Byzantine/Majority Text). It became the dominant English Bible for 300+ years, profoundly shaping the English language, literature, law, and Western civilization.",
+      "scripture": null,
+      "category": "reformation", "era": "reformation-modern", "importance": 2, "type": "event",
+      "tags": ["KJV", "king james", "bible", "english", "translation", "1611", "textus receptus", "scripture"]
+    },
+    {
+      "id": "mayflower", "year": 1620, "title": "Pilgrims — Mayflower Compact",
+      "subtitle": "A City Upon a Hill — Christian Foundation of America",
+      "description": "102 Separatist Pilgrims sailed on the Mayflower to the New World, driven by a desire to worship God freely. Before landing at Plymouth, 41 men signed the Mayflower Compact — a foundational document establishing self-government under God. This planted the seed of a nation conceived in biblical principles. 'We shall be as a city upon a hill' (John Winthrop, 1630).",
+      "scripture": null,
+      "category": "modern", "era": "reformation-modern", "importance": 2, "type": "event",
+      "tags": ["pilgrims", "mayflower", "america", "plymouth", "compact", "freedom", "separatists", "puritan"]
+    },
+    {
+      "id": "american-independence", "year": 1776, "title": "American Independence",
+      "subtitle": "Endowed by Their Creator with Unalienable Rights",
+      "description": "The thirteen American colonies declared independence from Britain on July 4, 1776. The Declaration of Independence appeals to 'Nature's God,' 'Creator,' 'Supreme Judge of the World,' and 'divine Providence.' The United States Constitution (1787) established religious liberty, separation of powers, and a republican government — broadly shaped by biblical principles.",
+      "scripture": null,
+      "category": "modern", "era": "reformation-modern", "importance": 2, "type": "event",
+      "concurrent": "Europe: Enlightenment Age. Industrial Revolution beginning in Britain",
+      "tags": ["america", "independence", "1776", "declaration", "creator", "rights", "liberty", "constitution"]
+    },
+    {
+      "id": "darwin", "year": 1859, "title": "Darwin's Origin of Species",
+      "subtitle": "Evolution Theory Challenges Biblical Creation",
+      "description": "Charles Darwin published 'On the Origin of Species by Means of Natural Selection,' proposing that all life evolved from a common ancestor through random mutation and natural selection. This directly challenged the Genesis account of creation. Darwinism became the intellectual foundation for atheism, secular humanism, and naturalistic worldviews that have dominated education ever since.",
+      "scripture": "Genesis 1:1; Colossians 1:16",
+      "category": "modern", "era": "reformation-modern", "importance": 2, "type": "event",
+      "tags": ["darwin", "evolution", "origin of species", "creation", "naturalism", "atheism", "genesis", "science"]
+    },
+    {
+      "id": "wwi", "year": 1914, "title": "World War I",
+      "subtitle": "The Great War — 20 Million Dead",
+      "description": "The First World War (1914-1918) devastated Europe and the Ottoman Empire. The Ottoman Empire's collapse opened Palestine to Jewish immigration. The Balfour Declaration (1917) expressed British support for a Jewish homeland in Palestine — a critical step toward Israel's rebirth as a nation in 1948.",
+      "scripture": null,
+      "category": "modern", "era": "reformation-modern", "importance": 2, "type": "event",
+      "tags": ["WWI", "world war", "1914", "balfour", "ottoman", "palestine", "israel", "world history"]
+    },
+    {
+      "id": "holocaust-wwii", "year": 1939, "title": "World War II & The Holocaust",
+      "subtitle": "6 Million Jews Murdered — Then Israel Reborn",
+      "description": "Adolf Hitler's Nazi regime systematically murdered 6 million Jews (the Holocaust) in World War II (1939-1945). The horror of the Holocaust galvanized international support for Jewish statehood. Just three years after WWII ended, Israel declared independence — fulfilling prophecies of Israel's return to her land.",
+      "scripture": "Ezekiel 37:1-14; Isaiah 66:8",
+      "category": "modern", "era": "reformation-modern", "importance": 2, "type": "event",
+      "concurrent": "Global: 70-85 million total deaths in WWII. Atomic bombs on Japan. UN founded 1945",
+      "tags": ["wwii", "holocaust", "hitler", "nazi", "6 million", "israel", "prophecy", "world war", "jews"]
+    },
+    {
+      "id": "israel-nation", "year": 1948, "title": "Israel Becomes a Nation",
+      "subtitle": "Born in a Day — May 14, 1948",
+      "description": "On May 14, 1948, David Ben-Gurion proclaimed the establishment of the State of Israel — the fulfillment of Ezekiel's valley of dry bones vision and Isaiah's prophecy that a nation would be born in a day (Isaiah 66:8). The United States recognized Israel within 11 minutes. Israel's re-establishment after 2,500 years of exile is considered one of history's greatest prophetic fulfillments.",
+      "scripture": "Isaiah 66:8; Ezekiel 37:1-14; Amos 9:14-15; Zephaniah 3:9-20",
+      "category": "modern", "era": "reformation-modern", "importance": 1, "type": "event",
+      "concurrent": "Cold War beginning. UN declares Israel's independence. Arab nations immediately invade",
+      "tags": ["israel", "1948", "nation", "prophecy", "born in a day", "isaiah", "ezekiel", "ben-gurion", "jewish state"]
+    },
+    {
+      "id": "six-day-war", "year": 1967, "title": "Six-Day War — Jerusalem Reunified",
+      "subtitle": "Jerusalem Back Under Jewish Control for First Time Since 586 BC",
+      "description": "In six days (June 5-10, 1967), Israel defeated the combined armies of Egypt, Jordan, and Syria. Israel captured the Sinai Peninsula, West Bank, Golan Heights, Gaza Strip, and — most significantly — the Old City of Jerusalem. For the first time since 586 BC, Jews controlled Jerusalem. Jesus predicted Jerusalem would be 'trodden down by the Gentiles' until the time of the Gentiles was fulfilled (Luke 21:24).",
+      "scripture": "Luke 21:24; Zechariah 12:2-3",
+      "category": "modern", "era": "reformation-modern", "importance": 2, "type": "event",
+      "tags": ["six day war", "israel", "jerusalem", "1967", "prophecy", "gentiles", "temple mount", "zechariah"]
+    },
+    {
+      "id": "present-day", "year": 2026, "title": "The Present Day",
+      "subtitle": "We Await the Return of the King",
+      "description": "From Adam to our present day spans over 6,000 years of human history — all of it under God's sovereign plan. The church age continues; Israel is back in the land; the Gospel has been preached to nearly all nations. We await the fulfillment of all remaining prophecy: the Rapture, the Tribulation, Christ's Second Coming, the Millennium, and the New Heaven and New Earth.",
+      "scripture": "Acts 1:11; Revelation 22:20; Titus 2:13",
+      "category": "modern", "era": "reformation-modern", "importance": 2, "type": "event",
+      "tags": ["present", "return", "second coming", "rapture", "millennium", "revelation", "maranatha", "hope"]
+    }
+  ]
+}

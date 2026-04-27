@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c \"import json,sys; d=json.load\\(open\\('d:/Abi/git_src/adams-synchronological/data/timeline.json'\\)\\); print\\(f'Eras: {len\\(d[\\\\\"eras\\\\\"]\\)}, Categories: {len\\(d[\\\\\"categories\\\\\"]\\)}, Events: {len\\(d[\\\\\"events\\\\\"]\\)}'\\)\")"
+    ]
+  }
+}
