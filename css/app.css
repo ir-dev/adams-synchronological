@@ -1,5 +1,8 @@
 /* ===== ARK-RAPID (ASM) — Mobile-First Dark Theme ===== */
 
+/* CRITICAL: prevent CSS display:flex/block from overriding the HTML hidden attribute */
+[hidden] { display: none !important; }
+
 :root {
   --bg: #0d1117;
   --bg2: #161b22;

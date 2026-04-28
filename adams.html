@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ARK-RAPID (ASM) | Visual Timeline — Adams Synchronological Map</title>
+  <link rel="stylesheet" href="visjs/vis-timeline-graph2d.7.7.2.min.css">
+  <style>
+    /* ── Reset & Variables ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    [hidden] { display: none !important; }
+    :root {
+      --bg: #0d1117; --bg2: #161b22; --bg3: #21262d;
+      --border: #30363d; --text: #e6edf3; --text-m: #8b949e; --text-d: #6e7681;
+      --gold: #e3a820; --gold2: #a07010; --blue: #58a6ff;
+      --green: #3fb950; --red: #f85149; --orange: #d29922; --purple: #bc8cff;
+      --hdr: 52px; --radius: 8px; --rsm: 5px; --tr: .15s ease;
+    }
+    html, body { height: 100%; overflow: hidden; background: var(--bg); color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 13px; }
+
+    /* ── Header ── */
+    #hdr {
+      height: var(--hdr); background: var(--bg2); border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 8px; padding: 0 12px;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    }
+    .logo { font-size: 15px; font-weight: 800; white-space: nowrap; margin-right: 4px; }
+    .logo span:first-child { color: var(--gold); }
+    .logo-sub { font-size: 10px; color: var(--text-d); white-space: nowrap; }
+    .hdr-sep { width: 1px; height: 22px; background: var(--border); flex-shrink: 0; }
+
+    .hdr-btn {
+      background: var(--bg3); border: 1px solid var(--border); border-radius: var(--rsm);
+      color: var(--text-m); cursor: pointer; font-size: 12px; padding: 4px 9px;
+      white-space: nowrap; display: flex; align-items: center; gap: 4px;
+      transition: all var(--tr);
+    }
+    .hdr-btn:hover { border-color: var(--gold2); color: var(--gold); }
+    .hdr-btn.active { background: var(--gold); border-color: var(--gold); color: #000; font-weight: 700; }
+    .hdr-btn svg { flex-shrink: 0; }
+
+    #search-wrap { position: relative; display: flex; align-items: center; }
+    #search-input {
+      background: var(--bg3); border: 1px solid var(--border); border-radius: var(--rsm);
+      color: var(--text); font-size: 12px; padding: 4px 28px 4px 8px; outline: none;
+      width: 160px; transition: border-color var(--tr);
+    }
+    #search-input:focus { border-color: var(--gold); }
+    #search-clear {
+      position: absolute; right: 4px; background: none; border: none;
+      color: var(--text-d); cursor: pointer; font-size: 11px; padding: 2px 4px;
+    }
+    #search-clear:hover { color: var(--text); }
+
+    #goto-wrap { display: flex; gap: 4px; align-items: center; }
+    #goto-input {
+      background: var(--bg3); border: 1px solid var(--border); border-radius: var(--rsm);
+      color: var(--text); font-size: 12px; padding: 4px 8px; outline: none; width: 80px;
+    }
+    #goto-input:focus { border-color: var(--gold); }
+
+    select.hdr-select {
+      background: var(--bg3); border: 1px solid var(--border); border-radius: var(--rsm);
+      color: var(--text-m); font-size: 11px; padding: 4px 6px; outline: none; cursor: pointer;
+    }
+
+    .hdr-spacer { flex: 1; }
+
+    /* ── Main layout ── */
+    #main {
+      position: fixed; top: var(--hdr); left: 0; right: 0; bottom: 0;
+      display: flex; overflow: hidden;
+    }
+
+    /* ── Timeline wrap ── */
+    #tl-wrap { flex: 1; position: relative; overflow: hidden; }
+    #timeline { width: 100%; height: 100%; }
+
+    /* ── Connections SVG overlay ── */
+    #conn-svg {
+      position: absolute; inset: 0; pointer-events: none; z-index: 5;
+      width: 100%; height: 100%; overflow: visible;
+    }
+
+    /* ── Detail Panel ── */
+    #detail {
+      width: 340px; flex-shrink: 0; background: var(--bg2);
+      border-left: 1px solid var(--border); display: flex; flex-direction: column;
+      overflow: hidden; transition: width var(--tr);
+    }
+    #detail.closed { width: 0; }
+    #detail-hdr {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 12px; border-bottom: 1px solid var(--border); flex-shrink: 0;
+    }
+    #detail-title { font-size: 13px; font-weight: 700; }
+    #detail-close {
+      background: none; border: none; color: var(--text-d); cursor: pointer;
+      font-size: 16px; padding: 0 4px; line-height: 1;
+    }
+    #detail-close:hover { color: var(--text); }
+    #detail-body { flex: 1; overflow-y: auto; padding: 12px; }
+    #detail-body::-webkit-scrollbar { width: 4px; }
+    #detail-body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+    .detail-era-badge {
+      display: inline-flex; align-items: center; gap: 4px; font-size: 10px;
+      font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      padding: 2px 7px; border-radius: 10px; margin-bottom: 8px;
+    }
+    .detail-year { font-size: 11px; font-weight: 700; color: var(--gold); margin-bottom: 3px; }
+    .detail-name { font-size: 17px; font-weight: 800; line-height: 1.2; margin-bottom: 3px; }
+    .detail-sub { font-size: 11.5px; color: var(--text-m); margin-bottom: 10px; }
+    .detail-desc { font-size: 12.5px; line-height: 1.6; color: var(--text-m); margin-bottom: 12px; }
+    .detail-section { font-size: 10px; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--text-d); margin: 12px 0 5px; }
+    .detail-scripture {
+      font-size: 12px; color: var(--blue); background: rgba(88,166,255,.08);
+      border-left: 2px solid var(--blue); padding: 6px 10px; border-radius: 0 var(--rsm) var(--rsm) 0;
+    }
+    .detail-concurrent {
+      font-size: 12px; color: var(--text-m); background: var(--bg3);
+      border-radius: var(--rsm); padding: 7px 10px;
+    }
+    .detail-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
+    .detail-tag {
+      background: var(--bg3); border: 1px solid var(--border); border-radius: 10px;
+      color: var(--text-d); font-size: 10px; padding: 1px 7px;
+    }
+
+    /* Comments in detail */
+    .cmt-form textarea {
+      width: 100%; background: var(--bg3); border: 1px solid var(--border);
+      border-radius: var(--rsm); color: var(--text); font-size: 12px;
+      padding: 7px 9px; resize: vertical; min-height: 60px; outline: none;
+      font-family: inherit; margin-bottom: 6px;
+    }
+    .cmt-form textarea:focus { border-color: var(--gold); }
+    .cmt-form input[type=text] {
+      width: 100%; background: var(--bg3); border: 1px solid var(--border);
+      border-radius: var(--rsm); color: var(--text); font-size: 12px;
+      padding: 5px 9px; outline: none; margin-bottom: 6px;
+    }
+    .cmt-form input:focus { border-color: var(--gold); }
+    .cmt-types { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 6px; }
+    .cmt-type-btn {
+      background: var(--bg3); border: 1px solid var(--border); border-radius: 12px;
+      color: var(--text-d); cursor: pointer; font-size: 10px; padding: 2px 8px;
+      transition: all var(--tr);
+    }
+    .cmt-type-btn.sel-support  { background: #1a4a1a; border-color: var(--green); color: var(--green); }
+    .cmt-type-btn.sel-challenge{ background: #4a1a1a; border-color: var(--red);   color: var(--red);   }
+    .cmt-type-btn.sel-question { background: #1a3a4a; border-color: var(--blue);  color: var(--blue);  }
+    .cmt-type-btn.sel-note     { background: #3a2a1a; border-color: var(--orange);color: var(--orange);}
+    .cmt-submit {
+      background: var(--gold); border: none; border-radius: var(--rsm);
+      color: #000; cursor: pointer; font-size: 12px; font-weight: 700; padding: 5px 14px;
+    }
+    .cmt-submit:hover { opacity: .88; }
+    .cmt-item {
+      background: var(--bg3); border: 1px solid var(--border); border-radius: var(--rsm);
+      padding: 8px 10px; margin-bottom: 8px;
+    }
+    .cmt-item-hdr { display: flex; align-items: center; gap: 6px; margin-bottom: 3px; }
+    .cmt-author { font-size: 11px; font-weight: 700; }
+    .cmt-date { font-size: 10px; color: var(--text-d); }
+    .cmt-badge { font-size: 9px; font-weight: 700; padding: 1px 5px; border-radius: 8px; }
+    .badge-support  { background:#1a4a1a; color:var(--green); }
+    .badge-challenge{ background:#4a1a1a; color:var(--red);   }
+    .badge-question { background:#1a3a4a; color:var(--blue);  }
+    .badge-note     { background:#3a2a1a; color:var(--orange);}
+    .cmt-text { font-size: 12px; color: var(--text-m); line-height: 1.5; }
+    .cmt-empty { font-size: 11.5px; color: var(--text-d); text-align: center; padding: 12px; }
+    .cmt-na {
+      font-size: 11.5px; color: var(--text-d); background: var(--bg3);
+      border-radius: var(--rsm); padding: 10px; text-align: center; line-height: 1.5;
+    }
+
+    /* ── Modals ── */
+    .modal-back {
+      position: fixed; inset: 0; z-index: 500; background: rgba(0,0,0,.75);
+      display: flex; align-items: center; justify-content: center; padding: 16px;
+    }
+    .modal-box {
+      background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius);
+      width: 100%; max-width: 440px; padding: 20px;
+    }
+    .modal-box h3 { font-size: 15px; font-weight: 700; margin-bottom: 14px; }
+    .modal-field { margin-bottom: 10px; }
+    .modal-field label { display: block; font-size: 11px; color: var(--text-d); margin-bottom: 4px; }
+    .modal-field input, .modal-field select, .modal-field textarea {
+      width: 100%; background: var(--bg3); border: 1px solid var(--border);
+      border-radius: var(--rsm); color: var(--text); font-size: 13px;
+      padding: 7px 10px; outline: none; font-family: inherit;
+    }
+    .modal-field input:focus, .modal-field select:focus, .modal-field textarea:focus
+      { border-color: var(--gold); }
+    .modal-field select { cursor: pointer; }
+    .modal-field input[type=color] { height: 36px; padding: 2px; cursor: pointer; border-radius: var(--rsm); }
+    .modal-row { display: flex; gap: 8px; }
+    .modal-row .modal-field { flex: 1; }
+    .modal-actions { display: flex; gap: 8px; margin-top: 16px; justify-content: flex-end; }
+    .btn-prim {
+      background: var(--gold); border: none; border-radius: var(--rsm);
+      color: #000; cursor: pointer; font-size: 13px; font-weight: 700; padding: 7px 18px;
+    }
+    .btn-prim:hover { opacity: .88; }
+    .btn-ghost {
+      background: none; border: 1px solid var(--border); border-radius: var(--rsm);
+      color: var(--text-m); cursor: pointer; font-size: 13px; padding: 7px 14px;
+    }
+    .btn-ghost:hover { border-color: var(--gold2); color: var(--gold); }
+
+    /* ── Conn manage panel ── */
+    #conn-panel {
+      position: fixed; bottom: 0; left: 0; right: 340px; background: var(--bg2);
+      border-top: 1px solid var(--border); padding: 8px 14px;
+      display: flex; align-items: center; gap: 10px; z-index: 100;
+      font-size: 11.5px; color: var(--text-m);
+    }
+    #conn-panel.detail-open { right: 340px; }
+    #conn-panel select { background: var(--bg3); border: 1px solid var(--border);
+      border-radius: var(--rsm); color: var(--text-m); font-size: 11px; padding: 3px 6px; }
+    #conn-panel input[type=color] { width: 28px; height: 24px; border-radius: 4px;
+      border: 1px solid var(--border); padding: 1px; cursor: pointer; }
+
+    /* ── Toast ── */
+    #toast {
+      position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(12px);
+      background: var(--bg3); border: 1px solid var(--border); border-radius: var(--rsm);
+      color: var(--text); font-size: 12px; padding: 7px 16px; opacity: 0;
+      pointer-events: none; transition: opacity .2s, transform .2s; z-index: 999;
+    }
+    #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* ── vis.js overrides ── */
+    .vis-timeline { background: var(--bg) !important; border-color: var(--border) !important; }
+    .vis-panel.vis-left { background: var(--bg2) !important; border-color: var(--border) !important; }
+    .vis-label { background: var(--bg2) !important; border-color: var(--border) !important;
+      color: var(--text-m) !important; font-size: 11px !important; }
+    .vis-label .vis-inner { padding: 4px 8px !important; }
+    .vis-time-axis { background: var(--bg) !important; border-color: var(--border) !important; }
+    .vis-time-axis .vis-text { color: var(--text-d) !important; font-size: 10px !important; }
+    .vis-time-axis .vis-grid.vis-minor { border-color: #21262d !important; }
+    .vis-time-axis .vis-grid.vis-major { border-color: #30363d !important; }
+    .vis-item { border-radius: 3px !important; font-size: 11px !important; }
+    .vis-item.vis-selected { border-color: var(--gold) !important; box-shadow: 0 0 0 2px rgba(227,168,32,.4) !important; }
+    .vis-item .vis-item-content { padding: 2px 6px !important; }
+    .vis-item.vis-range { border-width: 1px !important; }
+    .vis-item.vis-box { border-width: 1px !important; }
+    .vis-item.vis-dot { border-width: 3px !important; }
+    .vis-tooltip {
+      background: var(--bg2) !important; border: 1px solid var(--border) !important;
+      color: var(--text-m) !important; border-radius: var(--rsm) !important;
+      font-size: 11.5px !important; max-width: 280px !important; padding: 8px 10px !important;
+      line-height: 1.4 !important;
+    }
+
+    /* ── Search highlight ── */
+    .vis-item.search-match { box-shadow: 0 0 0 2px var(--gold) !important; }
+    .vis-item.search-dim { opacity: 0.25; }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      #detail { width: 100%; position: fixed; bottom: 0; left: 0; right: 0; top: auto; height: 55vh; }
+      #detail.closed { height: 0; }
+      #detail { border-left: none; border-top: 1px solid var(--border); }
+      #logo-sub, .logo-sub { display: none; }
+      #search-input { width: 110px; }
+      #goto-input { width: 60px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════ HEADER ═══════════ -->
+<div id="hdr">
+  <div>
+    <div class="logo"><span>ARK</span>-<span style="color:var(--text)">RAPID</span> <span style="color:var(--text-d);font-size:12px;font-weight:600">(ASM)</span></div>
+    <div class="logo-sub">Adams Synchronological Map</div>
+  </div>
+  <div class="hdr-sep"></div>
+
+  <!-- Zoom -->
+  <button class="hdr-btn" id="btn-zoom-in" title="Zoom In (Ctrl+Scroll)">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+    Zoom +
+  </button>
+  <button class="hdr-btn" id="btn-zoom-out" title="Zoom Out">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+    Zoom −
+  </button>
+  <button class="hdr-btn" id="btn-fit" title="Fit all events in view">⊞ Fit All</button>
+
+  <div class="hdr-sep"></div>
+
+  <!-- Go to year -->
+  <div id="goto-wrap">
+    <input id="goto-input" type="number" placeholder="Year…" title="Enter year (negative=BC)">
+    <button class="hdr-btn" id="btn-goto">Go</button>
+  </div>
+
+  <div class="hdr-sep"></div>
+
+  <!-- Search -->
+  <div id="search-wrap">
+    <input id="search-input" type="search" placeholder="Search…" autocomplete="off">
+    <button id="search-clear" hidden>✕</button>
+  </div>
+
+  <div class="hdr-sep"></div>
+
+  <!-- Group mode -->
+  <select class="hdr-select" id="group-mode" title="Change grouping">
+    <option value="era">Group by Era</option>
+    <option value="category">Group by Category</option>
+    <option value="flat">All in One Row</option>
+  </select>
+
+  <div class="hdr-sep"></div>
+
+  <!-- Features -->
+  <button class="hdr-btn" id="btn-connections" title="Toggle genealogical & historical connections">🔗 Connections</button>
+  <button class="hdr-btn" id="btn-add-group" title="Add custom group / track">+ Group</button>
+  <button class="hdr-btn" id="btn-add-item" title="Add custom event to a group">+ Event</button>
+  <button class="hdr-btn" id="btn-add-conn" title="Add custom connection between events">+ Link</button>
+
+  <div class="hdr-spacer"></div>
+
+  <a href="index.html" class="hdr-btn" style="text-decoration:none">📱 List View</a>
+</div>
+
+<!-- ═══════════ MAIN ═══════════ -->
+<div id="main">
+
+  <!-- Timeline -->
+  <div id="tl-wrap">
+    <div id="timeline"></div>
+    <svg id="conn-svg"></svg>
+  </div>
+
+  <!-- Detail Panel -->
+  <div id="detail" class="closed">
+    <div id="detail-hdr">
+      <span id="detail-title">Event Detail</span>
+      <button id="detail-close">✕</button>
+    </div>
+    <div id="detail-body"></div>
+  </div>
+</div>
+
+<!-- ═══════════ ADD GROUP MODAL ═══════════ -->
+<div class="modal-back" id="add-group-modal" hidden>
+  <div class="modal-box">
+    <h3>➕ Add Custom Group / Track</h3>
+    <div class="modal-field">
+      <label>Group Name</label>
+      <input id="ag-name" type="text" placeholder="e.g. My Church's History">
+    </div>
+    <div class="modal-row">
+      <div class="modal-field">
+        <label>Icon (emoji)</label>
+        <input id="ag-icon" type="text" placeholder="🏛️" maxlength="4">
+      </div>
+      <div class="modal-field">
+        <label>Color</label>
+        <input id="ag-color" type="color" value="#4a90d9">
+      </div>
+    </div>
+    <div class="modal-field">
+      <label>Description (optional)</label>
+      <input id="ag-desc" type="text" placeholder="Brief description">
+    </div>
+    <div class="modal-actions">
+      <button class="btn-ghost" id="ag-cancel">Cancel</button>
+      <button class="btn-prim" id="ag-save">Add Group</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ ADD ITEM MODAL ═══════════ -->
+<div class="modal-back" id="add-item-modal" hidden>
+  <div class="modal-box">
+    <h3>📌 Add Custom Event / Timeline</h3>
+    <div class="modal-field">
+      <label>Title *</label>
+      <input id="ai-title" type="text" placeholder="Event title">
+    </div>
+    <div class="modal-row">
+      <div class="modal-field">
+        <label>Start Year * (negative = BC)</label>
+        <input id="ai-start" type="number" placeholder="-33 or 1517">
+      </div>
+      <div class="modal-field">
+        <label>End Year (optional)</label>
+        <input id="ai-end" type="number" placeholder="leave blank for point">
+      </div>
+    </div>
+    <div class="modal-row">
+      <div class="modal-field">
+        <label>Group / Track *</label>
+        <select id="ai-group"></select>
+      </div>
+      <div class="modal-field">
+        <label>Color</label>
+        <input id="ai-color" type="color" value="#4a90d9">
+      </div>
+    </div>
+    <div class="modal-field">
+      <label>Description</label>
+      <textarea id="ai-desc" rows="2" placeholder="Brief description…"></textarea>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-ghost" id="ai-cancel">Cancel</button>
+      <button class="btn-prim" id="ai-save">Add Event</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ ADD CONNECTION MODAL ═══════════ -->
+<div class="modal-back" id="add-conn-modal" hidden>
+  <div class="modal-box">
+    <h3>🔗 Add Custom Link / Connection</h3>
+    <div class="modal-field">
+      <label>From Event</label>
+      <select id="ac-from"></select>
+    </div>
+    <div class="modal-field">
+      <label>To Event</label>
+      <select id="ac-to"></select>
+    </div>
+    <div class="modal-row">
+      <div class="modal-field">
+        <label>Label (optional)</label>
+        <input id="ac-label" type="text" placeholder="leads to / parent of…">
+      </div>
+      <div class="modal-field">
+        <label>Color</label>
+        <input id="ac-color" type="color" value="#e3a820">
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-ghost" id="ac-cancel">Cancel</button>
+      <button class="btn-prim" id="ac-save">Add Link</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ TOAST ═══════════ -->
+<div id="toast"></div>
+
+<!-- ═══════════ VIS.JS ═══════════ -->
+<script src="visjs/vis-timeline-graph2d.7.7.2.min.js"></script>
+<script>
+'use strict';
+
+/* ════════════════════════════════════
+   DATE HELPERS — BC/AD ↔ JavaScript Date
+   Historical:   -4004 = 4004 BC,  -1 = 1 BC,  1 = AD 1
+   Astronomical: year 0 = 1 BC,  year -4003 = 4004 BC
+   Conversion:   astro = hist≤0 ? hist+1 : hist
+════════════════════════════════════ */
+function yearToDate(hist) {
+  const astro = hist <= 0 ? hist + 1 : hist;
+  const d = new Date(0);
+  d.setFullYear(astro, 0, 1);
+  d.setHours(0, 0, 0, 0);
+  return d;
+}
+function dateToHist(d) {
+  const a = d.getFullYear();
+  return a <= 0 ? a - 1 : a;
+}
+function getAstroYear(d) {
+  // d can be moment or Date
+  return typeof d.year === 'function' ? d.year() : d.getFullYear();
+}
+function fmtYear(hist) {
+  if (hist == null) return '';
+  return hist < 0 ? `${Math.abs(hist)} BC` : `AD ${hist}`;
+}
+function fmtRange(ev) {
+  return ev.endYear ? `${fmtYear(ev.year)} – ${fmtYear(ev.endYear)}` : fmtYear(ev.year);
+}
+
+/* vis.js date axis format */
+function fmtMinor(date, scale) {
+  const a = getAstroYear(date);
+  const h = a <= 0 ? a - 1 : a;
+  if (scale === 'year') return h < 0 ? `${-h} BC` : `${h}`;
+  if (scale === 'month') {
+    if (h < 0) return `${-h} BC`;
+    const ms = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const mi = typeof date.month === 'function' ? date.month() : date.getMonth();
+    return ms[mi] || '';
+  }
+  return typeof date.format === 'function' ? date.format('D') : (date.getDate ? date.getDate().toString() : '');
+}
+function fmtMajor(date, scale) {
+  const a = getAstroYear(date);
+  const h = a <= 0 ? a - 1 : a;
+  if (h < 0) {
+    if (scale === 'year' || scale === 'month' || scale === 'day') {
+      const c = Math.ceil(-h / 100) * 100;
+      return `${c} BC`;
+    }
+    return `${-h} BC`;
+  }
+  if (scale === 'year') return '';
+  return h > 0 ? `AD ${Math.ceil(h / 100) * 100 || 100}` : 'AD 1';
+}
+
+/* ════════════════════════════════════
+   PREDEFINED CONNECTIONS (genealogical + empire)
+════════════════════════════════════ */
+const PREDEFINED_CONNECTIONS = [
+  // ── Pre-flood patriarchal line ──
+  {from:'adam',       to:'seth',        color:'#5a9a3a', label:''},
+  {from:'seth',       to:'enos',        color:'#5a9a3a', label:''},
+  {from:'enos',       to:'cainan',      color:'#5a9a3a', label:''},
+  {from:'cainan',     to:'mahalaleel',  color:'#5a9a3a', label:''},
+  {from:'mahalaleel', to:'jared',       color:'#5a9a3a', label:''},
+  {from:'jared',      to:'enoch',       color:'#5a9a3a', label:''},
+  {from:'enoch',      to:'methuselah',  color:'#5a9a3a', label:''},
+  {from:'methuselah', to:'lamech',      color:'#5a9a3a', label:''},
+  {from:'lamech',     to:'noah',        color:'#5a9a3a', label:''},
+  // ── Post-flood / Semitic line ──
+  {from:'noah',       to:'shem',        color:'#4a8aaa', label:''},
+  {from:'shem',       to:'arphaxad',    color:'#4a8aaa', label:''},
+  {from:'arphaxad',   to:'salah',       color:'#4a8aaa', label:''},
+  {from:'salah',      to:'eber',        color:'#4a8aaa', label:''},
+  {from:'eber',       to:'peleg',       color:'#4a8aaa', label:''},
+  {from:'peleg',      to:'reu',         color:'#4a8aaa', label:''},
+  {from:'reu',        to:'serug',       color:'#4a8aaa', label:''},
+  {from:'serug',      to:'nahor',       color:'#4a8aaa', label:''},
+  {from:'nahor',      to:'terah',       color:'#4a8aaa', label:''},
+  {from:'terah',      to:'abraham-born',color:'#aa8a3a', label:''},
+  // ── Abrahamic line ──
+  {from:'abraham-born', to:'isaac-born',color:'#aa8a3a', label:''},
+  {from:'isaac-born',   to:'jacob-esau',color:'#aa8a3a', label:''},
+  {from:'jacob-esau',   to:'joseph-sold',color:'#9a5a3a', label:''},
+  // ── Salvation history ──
+  {from:'passover',   to:'crucifixion', color:'#c49a30', label:'Lamb → Lamb', style:'dashed'},
+  {from:'great-flood',to:'baptism-jesus',color:'#3a6a8a',label:'type', style:'dashed'},
+  // ── Empire succession ──
+  {from:'fall-samaria',       to:'babylon-captivity-1', color:'#8a3a3a', label:'→'},
+  {from:'babylon-captivity-1',to:'cyrus-decree',        color:'#6a4a3a', label:'→'},
+  {from:'cyrus-decree',       to:'alexander-great',     color:'#6a4a8a', label:'→'},
+  {from:'alexander-great',    to:'roman-empire',        color:'#8a6a4a', label:'→'},
+  {from:'roman-empire',       to:'fall-jerusalem-70',   color:'#6a4a4a', label:''},
+  // ── Kingdom history ──
+  {from:'kingdom-divided',    to:'fall-samaria',        color:'#7a3a3a', label:''},
+  {from:'fall-jerusalem',     to:'cyrus-decree',        color:'#5a5a3a', label:'70 yrs'},
+  // ── Christ ──
+  {from:'birth-jesus',        to:'crucifixion',         color:'#c49a30', label:''},
+  {from:'crucifixion',        to:'resurrection',        color:'#d4a843', label:'3 days'},
+  {from:'resurrection',       to:'pentecost',           color:'#d4a843', label:'50 days'},
+];
+
+/* ════════════════════════════════════
+   STATE
+════════════════════════════════════ */
+const S = {
+  tl: null,            // vis.Timeline
+  items: null,         // vis.DataSet
+  groups: null,        // vis.DataSet
+  data: null,          // timeline.json
+  groupMode: 'era',    // 'era' | 'category' | 'flat'
+  showConn: false,
+  customGroups: [],    // user-added groups
+  customItems: [],     // user-added items
+  customConns: [],     // user-added connections
+  searchQuery: '',
+  allConns: [],        // PREDEFINED_CONNECTIONS + customConns
+  nextCustomId: 1,
+};
+
+/* ════════════════════════════════════
+   CATEGORY META
+════════════════════════════════════ */
+const CAT_ICON = {
+  patriarch:'👤', event:'⚡', king:'👑', prophet:'📣', judge:'⚖️',
+  apostle:'✉️', empire:'🏛️', church:'⛪', reformation:'📖', modern:'🌍',
+};
+const CAT_COLOR = {
+  patriarch:'#5a8a3a', event:'#e3a820', king:'#8a3a8a', prophet:'#3a8a8a',
+  judge:'#8a6a3a', apostle:'#d46a43', empire:'#4a5a8a', church:'#6a4a7a',
+  reformation:'#3a6a3a', modern:'#3a5a7a',
+};
+
+function catIcon(c) { return CAT_ICON[c] || '•'; }
+function catColor(c) { return CAT_COLOR[c] || '#888'; }
+
+function escHtml(s) {
+  return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/* ════════════════════════════════════
+   BUILD GROUPS
+════════════════════════════════════ */
+function buildGroups() {
+  const gArr = [];
+  if (S.groupMode === 'era') {
+    S.data.eras.forEach((era, i) => {
+      gArr.push({
+        id: era.id,
+        content: `<span style="font-size:13px">${era.icon}</span> ${era.name}`,
+        title: era.description,
+        order: i,
+        style: `background:${era.color}18;`,
+      });
+    });
+  } else if (S.groupMode === 'category') {
+    S.data.categories.forEach((cat, i) => {
+      gArr.push({
+        id: cat.id,
+        content: `<span style="font-size:13px">${cat.icon}</span> ${cat.name}`,
+        order: i,
+        style: `background:${cat.color}18;`,
+      });
+    });
+  } else {
+    gArr.push({ id: 'all', content: '🌍 All Events', order: 0 });
+  }
+
+  // Background "era band" items for era mode
+  if (S.groupMode === 'era') {
+    const existingBg = (S.items ? S.items.get({ filter: i => i.type === 'background' }) : []).map(i => i.id);
+    if (S.items) S.items.remove(existingBg);
+  }
+
+  // Custom groups
+  S.customGroups.forEach((cg, i) => {
+    gArr.push({
+      id: cg.id,
+      content: `${cg.icon || '🔹'} ${escHtml(cg.name)}`,
+      title: cg.desc || '',
+      order: 1000 + i,
+      style: `background:${cg.color}18; border-left: 3px solid ${cg.color};`,
+    });
+  });
+
+  return gArr;
+}
+
+/* ════════════════════════════════════
+   BUILD ITEMS
+════════════════════════════════════ */
+function buildItems() {
+  const iArr = [];
+
+  S.data.events.forEach(ev => {
+    const era = S.data.eras.find(e => e.id === ev.era) || {};
+    const color = era.color || catColor(ev.category);
+    const icon = catIcon(ev.category);
+    const groupId = S.groupMode === 'era' ? (ev.era || 'pre-flood')
+                  : S.groupMode === 'category' ? (ev.category || 'event')
+                  : 'all';
+
+    const hasEnd = ev.endYear != null;
+    const type = hasEnd ? 'range' : 'box';
+
+    // Importance → opacity: importance 1 = solid, 5 = dim
+    const op = Math.max(0.4, 1 - (ev.importance - 1) * 0.15);
+    const borderColor = color;
+    const bgColor = hexToRgba(color, 0.25 + (0.5 - (ev.importance - 1) * 0.08));
+
+    const item = {
+      id: ev.id,
+      group: groupId,
+      type,
+      start: yearToDate(ev.year),
+      content: `${icon} ${escHtml(ev.title)}`,
+      title: buildTooltip(ev, era),
+      style: `background-color:${bgColor}; border-color:${borderColor}; color:#e6edf3; opacity:${op};`,
+      className: `imp-${ev.importance}`,
+      _ev: ev,
+    };
+    if (hasEnd) item.end = yearToDate(ev.endYear);
+    iArr.push(item);
+  });
+
+  // Background era bands (for any group mode — just behind all)
+  S.data.eras.forEach((era, i) => {
+    iArr.push({
+      id: `era-bg-${era.id}`,
+      type: 'background',
+      start: yearToDate(era.startYear),
+      end: yearToDate(era.endYear),
+      content: '',
+      style: `background-color: ${hexToRgba(era.color, 0.06)};`,
+      className: 'era-background',
+    });
+  });
+
+  // Custom items
+  S.customItems.forEach(ci => {
+    const hasEnd = ci.endYear != null;
+    const item = {
+      id: ci.id,
+      group: ci.groupId,
+      type: hasEnd ? 'range' : 'box',
+      start: yearToDate(ci.startYear),
+      content: `🔹 ${escHtml(ci.title)}`,
+      title: `<b>${escHtml(ci.title)}</b><br>${fmtYear(ci.startYear)}${hasEnd ? ' – '+fmtYear(ci.endYear) : ''}<br>${escHtml(ci.desc||'')}`,
+      style: `background-color:${hexToRgba(ci.color||'#4a90d9', 0.3)}; border-color:${ci.color||'#4a90d9'}; color:#e6edf3;`,
+      _custom: true, _ci: ci,
+    };
+    if (hasEnd) item.end = yearToDate(ci.endYear);
+    iArr.push(item);
+  });
+
+  return iArr;
+}
+
+function buildTooltip(ev, era) {
+  const yr = fmtRange(ev);
+  return `<div style="max-width:260px;line-height:1.5">
+    <div style="font-size:10px;color:#8b949e;text-transform:uppercase;letter-spacing:.06em">${era.icon||''} ${escHtml(era.name||'')}</div>
+    <b style="font-size:13px">${catIcon(ev.category)} ${escHtml(ev.title)}</b>
+    <div style="color:#e3a820;font-size:11px;margin:2px 0">${yr}</div>
+    <div style="color:#8b949e;font-size:11px;margin-top:4px">${escHtml((ev.description||'').slice(0,120))}${(ev.description||'').length>120?'…':''}</div>
+    ${ev.scripture?`<div style="color:#58a6ff;font-size:10px;margin-top:4px">📖 ${escHtml(ev.scripture)}</div>`:''}
+  </div>`;
+}
+
+function hexToRgba(hex, alpha) {
+  const h = hex.replace('#','');
+  const r = parseInt(h.slice(0,2),16)||0;
+  const g = parseInt(h.slice(2,4),16)||0;
+  const b = parseInt(h.slice(4,6),16)||0;
+  return `rgba(${r},${g},${b},${alpha.toFixed(2)})`;
+}
+
+/* ════════════════════════════════════
+   TIMELINE INIT
+════════════════════════════════════ */
+function initTimeline() {
+  S.groups = new vis.DataSet(buildGroups());
+  S.items  = new vis.DataSet(buildItems());
+
+  const options = {
+    orientation: { axis: 'top', item: 'top' },
+    height: '100%',
+    groupOrder: 'order',
+    groupHeightMode: 'auto',
+    selectable: true,
+    multiselect: false,
+    showCurrentTime: false,
+    moveable: true,
+    zoomable: true,
+    zoomKey: 'ctrlKey',
+    horizontalScroll: true,
+    verticalScroll: true,
+    stack: true,
+    align: 'left',
+    start: yearToDate(-4100),
+    end:   yearToDate(2100),
+    min:   yearToDate(-4200),
+    max:   yearToDate(2200),
+    zoomMin: 1000*60*60*24*365*2,      // 2 years
+    zoomMax: 1000*60*60*24*365*8500,   // 8500 years
+    tooltip: { followMouse: true, overflowMethod: 'cap' },
+    format: {
+      minorLabels: (date, scale) => fmtMinor(date, scale),
+      majorLabels: (date, scale) => fmtMajor(date, scale),
+    },
+    groupTemplate: (group, elem) => {
+      if (!group) return '';
+      const div = document.createElement('div');
+      div.innerHTML = group.content || '';
+      div.title = group.title || '';
+      div.style.cssText = 'padding:4px 8px;font-size:11px;color:#8b949e;cursor:default;';
+      return div;
+    },
+  };
+
+  const container = document.getElementById('timeline');
+  S.tl = new vis.Timeline(container, S.items, S.groups, options);
+
+  // Selection → open detail
+  S.tl.on('select', ({items}) => {
+    if (!items.length) return;
+    const id = items[0];
+    if (String(id).startsWith('era-bg-')) return;
+    openDetail(id);
+  });
+
+  // Redraw connections whenever view changes
+  S.tl.on('changed', () => {
+    if (S.showConn) drawConnections();
+  });
+
+  // Double-click to open detail
+  S.tl.on('doubleClick', (props) => {
+    if (props.item) openDetail(props.item);
+  });
+}
+
+/* ════════════════════════════════════
+   CONNECTIONS SVG
+════════════════════════════════════ */
+function drawConnections() {
+  const svg = document.getElementById('conn-svg');
+  const wrap = document.getElementById('tl-wrap');
+  const wRect = wrap.getBoundingClientRect();
+
+  // Resize SVG to match wrapper
+  svg.setAttribute('viewBox', `0 0 ${wRect.width} ${wRect.height}`);
+
+  // Build arrow defs once
+  svg.innerHTML = `<defs>
+    ${buildArrowDef('a-gold','#e3a820')}
+    ${buildArrowDef('a-green','#5a9a3a')}
+    ${buildArrowDef('a-blue','#4a8aaa')}
+    ${buildArrowDef('a-bronze','#aa8a3a')}
+    ${buildArrowDef('a-red','#8a3a3a')}
+    ${buildArrowDef('a-purple','#6a4a8a')}
+    ${buildArrowDef('a-gray','#6e7681')}
+  </defs>`;
+
+  const allConns = [...PREDEFINED_CONNECTIONS, ...S.customConns];
+
+  for (const conn of allConns) {
+    const fromEl = document.querySelector(`#timeline .vis-item[data-id="${CSS.escape(conn.from)}"]`);
+    const toEl   = document.querySelector(`#timeline .vis-item[data-id="${CSS.escape(conn.to)}"]`);
+    if (!fromEl || !toEl) continue;
+
+    const fRect = fromEl.getBoundingClientRect();
+    const tRect = toEl.getBoundingClientRect();
+    if (!fRect.width || !tRect.width) continue;
+
+    const x1 = fRect.right  - wRect.left;
+    const y1 = (fRect.top + fRect.bottom) / 2 - wRect.top;
+    const x2 = tRect.left   - wRect.left;
+    const y2 = (tRect.top + tRect.bottom) / 2 - wRect.top;
+
+    // Skip if both points are off-screen
+    if (x1 < -50 && x2 < -50) continue;
+    if (x1 > wRect.width+50 && x2 > wRect.width+50) continue;
+
+    const markerId = pickMarker(conn.color);
+    const midX = (x1+x2)/2;
+    const d = `M ${x1} ${y1} C ${midX} ${y1} ${midX} ${y2} ${x2} ${y2}`;
+
+    const path = document.createElementNS('http://www.w3.org/2000/svg','path');
+    path.setAttribute('d', d);
+    path.setAttribute('stroke', conn.color || '#e3a820');
+    path.setAttribute('stroke-width', '1.5');
+    path.setAttribute('fill', 'none');
+    path.setAttribute('opacity', '0.65');
+    if (conn.style === 'dashed') path.setAttribute('stroke-dasharray', '5,4');
+    path.setAttribute('marker-end', `url(#${markerId})`);
+    svg.appendChild(path);
+
+    if (conn.label) {
+      const txt = document.createElementNS('http://www.w3.org/2000/svg','text');
+      txt.setAttribute('x', midX);
+      txt.setAttribute('y', Math.min(y1,y2) + Math.abs(y2-y1)/2 - 5);
+      txt.setAttribute('fill', conn.color || '#e3a820');
+      txt.setAttribute('font-size', '9');
+      txt.setAttribute('text-anchor', 'middle');
+      txt.setAttribute('opacity', '0.8');
+      txt.textContent = conn.label;
+      svg.appendChild(txt);
+    }
+  }
+}
+
+function buildArrowDef(id, color) {
+  return `<marker id="${id}" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto">
+    <path d="M0,0 L0,6 L7,3 z" fill="${color}" opacity="0.8"/>
+  </marker>`;
+}
+
+function pickMarker(color) {
+  if (!color) return 'a-gold';
+  const c = color.toLowerCase();
+  if (c.includes('9a3a') || c === '#5a9a3a') return 'a-green';
+  if (c.includes('8aa') || c === '#4a8aaa') return 'a-blue';
+  if (c.includes('8a3a')) return 'a-red';
+  if (c.includes('4a8a') || c.includes('6a4a8a')) return 'a-purple';
+  if (c.includes('aa8a') || c.includes('aa5a')) return 'a-bronze';
+  if (c.includes('6e76') || c.includes('4a4a')) return 'a-gray';
+  return 'a-gold';
+}
+
+/* ════════════════════════════════════
+   DETAIL PANEL
+════════════════════════════════════ */
+function openDetail(itemId) {
+  const item = S.items.get(itemId);
+  if (!item) return;
+
+  const ev = item._ev;
+  if (!ev && item._custom) {
+    openCustomDetail(item);
+    return;
+  }
+  if (!ev) return;
+
+  const era = S.data.eras.find(e => e.id === ev.era) || {};
+  const icon = catIcon(ev.category);
+
+  document.getElementById('detail-title').textContent = ev.title;
+  document.getElementById('detail-body').innerHTML = `
+    <div class="detail-era-badge" style="background:${era.color}22;color:${era.color};border:1px solid ${era.color}44">
+      ${era.icon||''} ${escHtml(era.name)}
+    </div>
+    <div class="detail-year">${fmtRange(ev)}</div>
+    <div class="detail-name">${icon} ${escHtml(ev.title)}</div>
+    ${ev.subtitle?`<div class="detail-sub">${escHtml(ev.subtitle)}</div>`:''}
+    <div class="detail-desc">${escHtml(ev.description||'')}</div>
+    ${ev.scripture?`<div class="detail-section">📖 Scripture</div><div class="detail-scripture">${escHtml(ev.scripture)}</div>`:''}
+    ${ev.concurrent?`<div class="detail-section">🌍 Concurrent World History</div><div class="detail-concurrent">${escHtml(ev.concurrent)}</div>`:''}
+    ${(ev.tags&&ev.tags.length)?`<div class="detail-tags">${ev.tags.map(t=>`<span class="detail-tag">${escHtml(t)}</span>`).join('')}</div>`:''}
+    <div class="detail-section">💬 Discussion</div>
+    <div id="cmt-list-${ev.id}" class="cmt-empty">Loading…</div>
+    <div class="cmt-form" style="margin-top:10px">
+      <input type="text" id="cmt-name" placeholder="Your name (optional)" style="margin-bottom:6px">
+      <div class="cmt-types" id="cmt-types">
+        <button class="cmt-type-btn sel-support" data-t="support">✅ Support</button>
+        <button class="cmt-type-btn" data-t="challenge">❓ Challenge</button>
+        <button class="cmt-type-btn" data-t="question">🔵 Question</button>
+        <button class="cmt-type-btn" data-t="note">📝 Note</button>
+      </div>
+      <textarea id="cmt-text" placeholder="Share your thoughts on this event…"></textarea>
+      <div style="display:flex;align-items:center;gap:8px">
+        <button class="cmt-submit" id="cmt-submit" data-evid="${escHtml(ev.id)}">Post</button>
+        <span style="font-size:10px;color:var(--text-d)">Requires PHP server</span>
+      </div>
+    </div>`;
+
+  // type toggle
+  let selType = 'support';
+  document.getElementById('cmt-types').addEventListener('click', e => {
+    const btn = e.target.closest('.cmt-type-btn');
+    if (!btn) return;
+    document.querySelectorAll('#cmt-types .cmt-type-btn').forEach(b => {
+      b.className = 'cmt-type-btn';
+    });
+    selType = btn.dataset.t;
+    btn.classList.add(`sel-${selType}`);
+  });
+
+  // submit
+  document.getElementById('cmt-submit').addEventListener('click', async () => {
+    const name = (document.getElementById('cmt-name').value||'').trim();
+    const text = (document.getElementById('cmt-text').value||'').trim();
+    if (!text) { toast('Please enter a comment'); return; }
+    await postComment(ev.id, name||'Anonymous', selType, text, document.getElementById(`cmt-list-${ev.id}`));
+  });
+
+  document.getElementById('detail').classList.remove('closed');
+  loadComments(ev.id, document.getElementById(`cmt-list-${ev.id}`));
+}
+
+function openCustomDetail(item) {
+  const ci = item._ci;
+  document.getElementById('detail-title').textContent = ci.title;
+  document.getElementById('detail-body').innerHTML = `
+    <div class="detail-year">${fmtYear(ci.startYear)}${ci.endYear?' – '+fmtYear(ci.endYear):''}</div>
+    <div class="detail-name">🔹 ${escHtml(ci.title)}</div>
+    <div class="detail-desc">${escHtml(ci.desc||'(custom event)')}</div>
+    <div style="margin-top:12px">
+      <button class="btn-ghost" id="del-custom-item" data-id="${escHtml(ci.id)}" style="font-size:11px;padding:4px 10px;color:var(--red);border-color:var(--red)">🗑 Remove this event</button>
+    </div>`;
+  document.getElementById('detail').classList.remove('closed');
+  document.getElementById('del-custom-item').addEventListener('click', () => {
+    S.customItems = S.customItems.filter(x => x.id !== ci.id);
+    S.items.remove(ci.id);
+    saveLocal();
+    document.getElementById('detail').classList.add('closed');
+    toast('Event removed');
+  });
+}
+
+function closeDetail() {
+  document.getElementById('detail').classList.add('closed');
+  if (S.tl) S.tl.setSelection([]);
+}
+
+/* ════════════════════════════════════
+   COMMENTS
+════════════════════════════════════ */
+async function loadComments(eventId, listEl) {
+  if (!listEl) return;
+  try {
+    const res = await fetch(`api/comments.php?event_id=${encodeURIComponent(eventId)}`);
+    if (!res.ok) throw new Error('no api');
+    const data = await res.json();
+    renderComments(listEl, data.comments||[]);
+  } catch {
+    listEl.innerHTML = `<div class="cmt-na">💡 Comments need a PHP server.<br>Run: <code>php -S localhost:8080</code></div>`;
+  }
+}
+
+function renderComments(el, comments) {
+  if (!comments.length) { el.innerHTML = '<div class="cmt-empty">No comments yet. Be first!</div>'; return; }
+  el.innerHTML = comments.map(c => `
+    <div class="cmt-item">
+      <div class="cmt-item-hdr">
+        <span class="cmt-author">${escHtml(c.user_name||'Anonymous')}</span>
+        <span class="cmt-badge badge-${c.comment_type||'note'}">${cmtLabel(c.comment_type)}</span>
+        <span class="cmt-date">${fmtDate(c.created_at)}</span>
+      </div>
+      <div class="cmt-text">${escHtml(c.comment_text)}</div>
+    </div>`).join('');
+}
+
+function cmtLabel(t) {
+  return {support:'✅ Support',challenge:'❓ Challenge',question:'🔵 Question',note:'📝 Note'}[t]||t;
+}
+function fmtDate(s) {
+  try { return new Date(s).toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'}); } catch { return s||''; }
+}
+
+async function postComment(eventId, name, type, text, listEl) {
+  const btn = document.getElementById('cmt-submit');
+  if (btn) { btn.disabled=true; btn.textContent='Posting…'; }
+  try {
+    const res = await fetch('api/comments.php',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({event_id:eventId,user_name:name,comment_type:type,comment_text:text}),
+    });
+    if (!res.ok) throw new Error('API error');
+    const d = await res.json();
+    if (d.success) {
+      const ta = document.getElementById('cmt-text');
+      if (ta) ta.value='';
+      toast('Comment posted ✅');
+      loadComments(eventId, listEl);
+    } else throw new Error(d.error||'Error');
+  } catch(e) { toast(`Failed: ${e.message}`); }
+  finally { if (btn) { btn.disabled=false; btn.textContent='Post'; } }
+}
+
+/* ════════════════════════════════════
+   SEARCH
+════════════════════════════════════ */
+let searchTimer = null;
+function doSearch(q) {
+  S.searchQuery = q.trim().toLowerCase();
+  if (!S.searchQuery) {
+    // Reset all items
+    const updates = S.items.get().map(i => ({ id: i.id, className: i.className?.replace(/\bsearch-match\b|\bsearch-dim\b/g,'').trim()||'' }));
+    S.items.update(updates);
+    return;
+  }
+  const updates = [];
+  for (const item of S.items.get()) {
+    if (String(item.id).startsWith('era-bg-')) continue;
+    const ev = item._ev;
+    if (!ev) continue;
+    const haystack = `${ev.title} ${ev.subtitle||''} ${ev.description||''} ${ev.scripture||''} ${(ev.tags||[]).join(' ')}`.toLowerCase();
+    const match = haystack.includes(S.searchQuery);
+    const base = (item.className||'').replace(/\bsearch-match\b|\bsearch-dim\b/g,'').trim();
+    updates.push({ id: item.id, className: `${base} ${match ? 'search-match' : 'search-dim'}`.trim() });
+  }
+  S.items.update(updates);
+
+  // Focus first match
+  const firstMatch = S.items.get({ filter: i => (i.className||'').includes('search-match') })[0];
+  if (firstMatch && S.tl) {
+    S.tl.focus([firstMatch.id], { animation: { duration: 600, easingFunction: 'easeInOutQuad' } });
+  }
+}
+
+/* ════════════════════════════════════
+   JUMP TO YEAR
+════════════════════════════════════ */
+function jumpToYear(histYear) {
+  const n = parseInt(histYear, 10);
+  if (isNaN(n)) { toast('Enter a valid year'); return; }
+  const d = yearToDate(n);
+  const win = S.tl.getWindow();
+  const span = win.end - win.start;
+  S.tl.setWindow(new Date(d - span*0.3), new Date(d.getTime() + span*0.7), {animation:{duration:600,easingFunction:'easeInOutQuad'}});
+  toast(`Jumped to ${fmtYear(n)}`);
+}
+
+/* ════════════════════════════════════
+   CUSTOM GROUPS & ITEMS
+════════════════════════════════════ */
+function addCustomGroup(name, color, icon, desc) {
+  const id = `cg-${Date.now()}-${S.nextCustomId++}`;
+  const cg = { id, name, color, icon: icon||'🔹', desc: desc||'' };
+  S.customGroups.push(cg);
+  S.groups.add({
+    id, content: `${cg.icon} ${escHtml(name)}`,
+    title: desc, order: 1000 + S.customGroups.length,
+    style: `background:${hexToRgba(color,.12)};border-left:3px solid ${color};`,
+  });
+  saveLocal();
+  toast(`Group "${name}" added`);
+}
+
+function addCustomItem(title, startYear, endYear, groupId, color, desc) {
+  const id = `ci-${Date.now()}-${S.nextCustomId++}`;
+  const ci = { id, title, startYear, endYear, groupId, color, desc };
+  S.customItems.push(ci);
+  const hasEnd = endYear != null;
+  const item = {
+    id, group: groupId,
+    type: hasEnd ? 'range' : 'box',
+    start: yearToDate(startYear),
+    content: `🔹 ${escHtml(title)}`,
+    title: `<b>${escHtml(title)}</b><br>${fmtYear(startYear)}${hasEnd?' – '+fmtYear(endYear):''}`,
+    style: `background-color:${hexToRgba(color,.3)};border-color:${color};color:#e6edf3;`,
+    _custom: true, _ci: ci,
+  };
+  if (hasEnd) item.end = yearToDate(endYear);
+  S.items.add(item);
+  saveLocal();
+  toast(`Event "${title}" added`);
+  S.tl.focus([id], {animation:{duration:600,easingFunction:'easeInOutQuad'}});
+}
+
+function addCustomConn(fromId, toId, label, color) {
+  const conn = { from: fromId, to: toId, label: label||'', color: color||'#e3a820' };
+  S.customConns.push(conn);
+  saveLocal();
+  if (S.showConn) drawConnections();
+  toast('Link added');
+}
+
+/* ════════════════════════════════════
+   LOCALSTORAGE
+════════════════════════════════════ */
+function saveLocal() {
+  try {
+    localStorage.setItem('ark-custom-groups', JSON.stringify(S.customGroups));
+    localStorage.setItem('ark-custom-items',  JSON.stringify(S.customItems));
+    localStorage.setItem('ark-custom-conns',  JSON.stringify(S.customConns));
+  } catch(e) {}
+}
+
+function loadLocal() {
+  try {
+    S.customGroups = JSON.parse(localStorage.getItem('ark-custom-groups')||'[]');
+    S.customItems  = JSON.parse(localStorage.getItem('ark-custom-items') ||'[]');
+    S.customConns  = JSON.parse(localStorage.getItem('ark-custom-conns') ||'[]');
+  } catch(e) {
+    S.customGroups = []; S.customItems = []; S.customConns = [];
+  }
+}
+
+/* ════════════════════════════════════
+   GROUP/ITEM SELECT POPULATION
+════════════════════════════════════ */
+function populateGroupSelect(selId) {
+  const sel = document.getElementById(selId);
+  sel.innerHTML = '';
+  // Preset data groups
+  const presetGroups = S.groupMode === 'era' ? S.data.eras.map(e=>({id:e.id,name:`${e.icon} ${e.name}`}))
+                     : S.groupMode === 'category' ? S.data.categories.map(c=>({id:c.id,name:`${c.icon} ${c.name}`}))
+                     : [{id:'all',name:'All Events'}];
+  for (const g of presetGroups) {
+    const o = document.createElement('option');
+    o.value = g.id; o.textContent = g.name; sel.appendChild(o);
+  }
+  for (const cg of S.customGroups) {
+    const o = document.createElement('option');
+    o.value = cg.id; o.textContent = `${cg.icon} ${cg.name}`; sel.appendChild(o);
+  }
+}
+
+function populateItemSelects(fromId, toId) {
+  const evts = S.data.events.map(e => ({ id: e.id, label: `${e.title} (${fmtYear(e.year)})` }));
+  const customs = S.customItems.map(c => ({ id: c.id, label: `🔹 ${c.title} (${fmtYear(c.startYear)})` }));
+  const all = [...evts, ...customs].sort((a,b)=>a.label.localeCompare(b.label));
+  for (const selId of [fromId, toId]) {
+    const sel = document.getElementById(selId);
+    sel.innerHTML = all.map(e=>`<option value="${escHtml(e.id)}">${escHtml(e.label)}</option>`).join('');
+  }
+}
+
+/* ════════════════════════════════════
+   REBUILD AFTER GROUP MODE CHANGE
+════════════════════════════════════ */
+function rebuildTimeline() {
+  S.groups.clear(); S.groups.add(buildGroups());
+  S.items.clear();  S.items.add(buildItems());
+  if (S.showConn) setTimeout(drawConnections, 200);
+}
+
+/* ════════════════════════════════════
+   TOAST
+════════════════════════════════════ */
+let toastTimer = null;
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 2500);
+}
+
+/* ════════════════════════════════════
+   BIND ALL EVENTS
+════════════════════════════════════ */
+function bindEvents() {
+  // Zoom
+  document.getElementById('btn-zoom-in').addEventListener('click', () => {
+    const w = S.tl.getWindow();
+    const mid = new Date((w.start.getTime()+w.end.getTime())/2);
+    const span = (w.end-w.start)*0.5;
+    S.tl.setWindow(new Date(mid-span/2),new Date(mid.getTime()+span/2),{animation:{duration:400,easingFunction:'easeInOutQuad'}});
+  });
+  document.getElementById('btn-zoom-out').addEventListener('click', () => {
+    const w = S.tl.getWindow();
+    const mid = new Date((w.start.getTime()+w.end.getTime())/2);
+    const span = (w.end-w.start)*1.5;
+    S.tl.setWindow(new Date(mid-span/2),new Date(mid.getTime()+span/2),{animation:{duration:400,easingFunction:'easeInOutQuad'}});
+  });
+  document.getElementById('btn-fit').addEventListener('click', () => {
+    S.tl.fit({animation:{duration:800,easingFunction:'easeInOutQuad'}});
+  });
+
+  // Go to year
+  const gotoInput = document.getElementById('goto-input');
+  document.getElementById('btn-goto').addEventListener('click', () => jumpToYear(gotoInput.value));
+  gotoInput.addEventListener('keydown', e => { if(e.key==='Enter') jumpToYear(gotoInput.value); });
+
+  // Search
+  const searchInput = document.getElementById('search-input');
+  const searchClear = document.getElementById('search-clear');
+  searchInput.addEventListener('input', () => {
+    searchClear.hidden = !searchInput.value;
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(() => doSearch(searchInput.value), 280);
+  });
+  searchClear.addEventListener('click', () => {
+    searchInput.value = '';
+    searchClear.hidden = true;
+    doSearch('');
+    searchInput.focus();
+  });
+
+  // Group mode
+  document.getElementById('group-mode').addEventListener('change', e => {
+    S.groupMode = e.target.value;
+    rebuildTimeline();
+  });
+
+  // Connections toggle
+  document.getElementById('btn-connections').addEventListener('click', () => {
+    S.showConn = !S.showConn;
+    document.getElementById('btn-connections').classList.toggle('active', S.showConn);
+    if (S.showConn) {
+      drawConnections();
+    } else {
+      document.getElementById('conn-svg').innerHTML = '';
+    }
+    toast(S.showConn ? 'Connections ON' : 'Connections OFF');
+  });
+
+  // Detail close
+  document.getElementById('detail-close').addEventListener('click', closeDetail);
+
+  // ── Add Group Modal ──
+  const agModal  = document.getElementById('add-group-modal');
+  document.getElementById('btn-add-group').addEventListener('click', () => { agModal.hidden = false; document.getElementById('ag-name').focus(); });
+  document.getElementById('ag-cancel').addEventListener('click', () => { agModal.hidden = true; });
+  document.getElementById('ag-save').addEventListener('click', () => {
+    const name = document.getElementById('ag-name').value.trim();
+    if (!name) { toast('Group name required'); return; }
+    addCustomGroup(name, document.getElementById('ag-color').value, document.getElementById('ag-icon').value.trim(), document.getElementById('ag-desc').value.trim());
+    agModal.hidden = true;
+    document.getElementById('ag-name').value = '';
+    document.getElementById('ag-icon').value = '';
+    document.getElementById('ag-desc').value = '';
+  });
+  agModal.addEventListener('click', e => { if(e.target===agModal) agModal.hidden=true; });
+
+  // ── Add Item Modal ──
+  const aiModal = document.getElementById('add-item-modal');
+  document.getElementById('btn-add-item').addEventListener('click', () => {
+    populateGroupSelect('ai-group');
+    aiModal.hidden = false;
+    document.getElementById('ai-title').focus();
+  });
+  document.getElementById('ai-cancel').addEventListener('click', () => { aiModal.hidden = true; });
+  document.getElementById('ai-save').addEventListener('click', () => {
+    const title = document.getElementById('ai-title').value.trim();
+    const start = parseInt(document.getElementById('ai-start').value,10);
+    const endVal = document.getElementById('ai-end').value.trim();
+    const end = endVal ? parseInt(endVal,10) : null;
+    const group = document.getElementById('ai-group').value;
+    const color = document.getElementById('ai-color').value;
+    const desc  = document.getElementById('ai-desc').value.trim();
+    if (!title) { toast('Title required'); return; }
+    if (isNaN(start)) { toast('Start year required'); return; }
+    if (end !== null && isNaN(end)) { toast('Invalid end year'); return; }
+    addCustomItem(title, start, end, group, color, desc);
+    aiModal.hidden = true;
+    document.getElementById('ai-title').value='';
+    document.getElementById('ai-start').value='';
+    document.getElementById('ai-end').value='';
+    document.getElementById('ai-desc').value='';
+  });
+  aiModal.addEventListener('click', e => { if(e.target===aiModal) aiModal.hidden=true; });
+
+  // ── Add Connection Modal ──
+  const acModal = document.getElementById('add-conn-modal');
+  document.getElementById('btn-add-conn').addEventListener('click', () => {
+    populateItemSelects('ac-from','ac-to');
+    acModal.hidden = false;
+    document.getElementById('btn-connections').classList.add('active');
+    S.showConn = true;
+  });
+  document.getElementById('ac-cancel').addEventListener('click', () => { acModal.hidden = true; });
+  document.getElementById('ac-save').addEventListener('click', () => {
+    const from  = document.getElementById('ac-from').value;
+    const to    = document.getElementById('ac-to').value;
+    const label = document.getElementById('ac-label').value.trim();
+    const color = document.getElementById('ac-color').value;
+    if (!from || !to) { toast('Select from & to events'); return; }
+    if (from === to)  { toast('From and To must be different'); return; }
+    addCustomConn(from, to, label, color);
+    acModal.hidden = true;
+    document.getElementById('ac-label').value='';
+  });
+  acModal.addEventListener('click', e => { if(e.target===acModal) acModal.hidden=true; });
+
+  // Close modals on Escape
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-back').forEach(m => { m.hidden = true; });
+      closeDetail();
+    }
+  });
+}
+
+/* ════════════════════════════════════
+   RESTORE CUSTOM DATA
+════════════════════════════════════ */
+function restoreCustomData() {
+  // Groups are already in buildGroups() via S.customGroups
+  // Items are already in buildItems() via S.customItems
+  // Connections are in S.customConns used in drawConnections()
+}
+
+/* ════════════════════════════════════
+   MAIN INIT
+════════════════════════════════════ */
+async function init() {
+  try {
+    const res = await fetch('data/timeline.json');
+    if (!res.ok) throw new Error('Cannot load data/timeline.json');
+    S.data = await res.json();
+  } catch(e) {
+    document.body.innerHTML = `<div style="color:#f85149;padding:40px;text-align:center"><h2>⚠️ ${e.message}</h2><p style="color:#8b949e;margin-top:8px">Open this file through a local server or file:// URL.</p></div>`;
+    return;
+  }
+
+  loadLocal();
+  initTimeline();
+  bindEvents();
+
+  // Keyboard shortcuts
+  document.addEventListener('keydown', e => {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    if (e.key === 'f' || e.key === 'F') S.tl.fit({animation:{duration:600}});
+    if (e.key === '+' || e.key === '=') document.getElementById('btn-zoom-in').click();
+    if (e.key === '-') document.getElementById('btn-zoom-out').click();
+    if (e.key === 'c' || e.key === 'C') document.getElementById('btn-connections').click();
+    if (e.key === 'Escape') closeDetail();
+  });
+
+  toast('Loaded ' + S.data.events.length + ' events across ' + S.data.eras.length + ' eras  ·  Ctrl+Scroll to zoom');
+}
+
+init();
+</script>
+</body>
+</html>
